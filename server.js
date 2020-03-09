@@ -1,13 +1,14 @@
 //Install express server
 const express = require("express");
 const path = require("path");
-const cookieSession = require("cookie-session");
-const cookieParser = require("cookie-parser");
+// const cookieSession = require("cookie-session");
+// const cookieParser = require("cookie-parser");
 
 const app = express();
 
-app.use(cookieParser());
+// app.use(cookieParser());
 
+/*
 app.use(
   // To protect the cookies
   cookieSession({
@@ -16,7 +17,7 @@ app.use(
     maxAge: 2 * 24 * 60 * 1000 // For just 1 day
   })
 );
-
+*/
 app.use(express.static(__dirname + "/dist/Holiday-Me"));
 
 app.get("/*", function(req, res) {
