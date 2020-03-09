@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { HttpClientModule } from '@angular/common/http';
 import { Requester } from "../form/requester";
 import { CookieService } from "ngx-cookie-service";
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: "root"
 })
 export class OpenidService {
+  [x: string]: any;
   private holidayRequestUrl: string;
   private _tokenRequestUrl: string;
   private oidc_url: string;
