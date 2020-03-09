@@ -2,20 +2,28 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Requester } from "../form/requester";
-
+import { CookieService } from "ngx-cookie-service";
 @Injectable({
   providedIn: "root"
 })
 export class OpenidService {
-  [x: string]: any;
-  private _tokenRequestUrl = "https://oauth2.googleapis.com/token";
-  private validateTokenUrl = "http://localhost:7070/api/v1/validate"
-  private addUnavailableEmployeeUrl = "http://localhost:7070/api/v1/addemployee"
-  private checkEmail = "http://localhost:7070/api/v1/verifymail/";
-  private getRequestsForEmployeeUrl = "http://localhost:7070/api/v1/request/requester/";
-  private makeRequestLink = "http://localhost:7070/api/v1/request"
+  private holidayRequestUrl: string;
 
-  constructor(private http: HttpClient) {}
+  
+  [x: string]: any;
+  private _tokenRequestUrl:string;
+  private oidc_url:string;
+  private validateTokenUrl = this.holidayRequestUrl + "validate";
+  private addUnavailableEmployeeUrl = this.holidayRequestUrl + "addemployee"
+  private checkEmail = this.holidayRequestUrl + "verifymail/";
+  private getRequestsForEmployeeUrl = this.holidayRequestUrl + "request/requester/";
+  private makeRequestLink = this.holidayRequestUrl + "request"
+
+  constructor(private http: HttpClient, private cookieservice:CookieService) {
+    this.holidayRequestUrl = this.cookieservice.get("backend_url");
+    this._tokenRequestUrl = this.cookieservice.get("tokenurl");
+    this.oidc_url = this.cookieservice.get("oidc");
+  }
   postAuthenticationCodForAccessAndIdToken(
     authenticationCode: string
   ): Observable<any> {
@@ -25,7 +33,7 @@ export class OpenidService {
     let body =
       "code=" +
       authenticationCode +
-      "&client_id=859455735473-bgmqqco3q588kgaog0g2k0fmnur5qvf9.apps.googleusercontent.com&client_secret=1ivNoDawR_DQAEaVrrc90op4&redirect_uri=http://localhost:4200/home&grant_type=authorization_code&";
+      this.oidc_url;
     return this.http.post<any>(this._tokenRequestUrl, body, {
       headers: headers
     });
