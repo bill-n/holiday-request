@@ -1,19 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
-import { OpenidService } from "../service/openid.service";
-import { Requester } from "./requester";
-import { MakingRequest } from "../makingRequest";
-import {
-  DaterangepickerComponent,
-  DaterangepickerConfig
-} from "ng2-daterangepicker";
+import { OpenidService } from "../service/openid.service"
+import { Requester } from './requester';
 
 @Component({
   selector: "app-form",
   templateUrl: "./form.component.html",
-  styleUrls: ["./form.component.css"],
-  providers: [OpenidService]
+  styleUrls: ["./form.component.css"]
 })
 export class FormComponent implements OnInit {
   startMinDate: Date;
@@ -22,88 +16,56 @@ export class FormComponent implements OnInit {
   reportMaxDate: Date;
   startDateSet: Boolean;
 
-  inlineRange;
+  regForm = new FormGroup({
+    request_start_date :  new FormControl(''),
+    request_report_date :  new FormControl(''),
+    from :  new FormControl(localStorage.getItem("userEmail")),
+    requester_id: new FormControl(localStorage.getItem("employee_id")),
+    requester_name: new FormControl(localStorage.getItem("f_name") + " " + localStorage.getItem("l_name"))
+  });
 
-  requestDetails = new MakingRequest();
-  userEmail = "";
-  msgShow: boolean = false;
-  validSelection: boolean = false;
-  message: string =
-    "Invalid selection! Please refresh the page and make a valid selection!";
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    if (type === "start") {
+      this.regForm.get("request_start_date").setValue(event.value);
+      console.log(
+        `${type}: ${event.value} -> ${this.regForm.get("request_start_date").value}`
+      );
+      console.log(` ${this.regForm.get("request_report_date").value}`);
+    } else if (type === "report") {
+      this.regForm.get("request_report_date").setValue(event.value);
+      console.log(
+        `${type}: ${event.value} -> ${this.regForm.get("request_report_date").value}`
+      );
+    }
+  }
 
-  private picker: DaterangepickerComponent;
+  startFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // To prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
 
-  constructor(
-    formBuilder: FormBuilder,
-    private openId: OpenidService,
-    private daterangepickerOptions: DaterangepickerConfig
-  ) {
+  reportFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // To prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
+
+  dateSort = "";
+  time_range = new FormGroup({});
+
+  constructor(formBuilder: FormBuilder,  private openId: OpenidService,) {
     const currentYear = new Date().getFullYear();
     this.startMinDate = new Date();
     this.startMaxDate = new Date(currentYear, 11, 31);
     this.reportMinDate = new Date();
     this.reportMaxDate = new Date(currentYear, 11, 31);
   }
-  form = new FormGroup({
-    request_start_date: new FormControl(""),
-    request_report_date: new FormControl(""),
-    from: new FormControl(localStorage.getItem("userEmail")),
-    requester_id: new FormControl(localStorage.getItem("employee_id")),
-    requester_name: new FormControl(
-      localStorage.getItem("f_name") + " " + localStorage.getItem("l_name")
-    )
-  });
-
-  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    if (type === "start") {
-      this.form.get("request_start_date").setValue(event.value);
-      console.log(
-        `${type}: ${event.value} -> ${
-          this.form.get("request_start_date").value
-        }`
-      );
-      console.log(` ${this.form.get("request_report_date").value}`);
-    } else if (type === "report") {
-      this.form.get("request_report_date").setValue(event.value);
-      console.log(
-        `${type}: ${event.value} -> ${
-          this.form.get("request_report_date").value
-        }`
-      );
-    }
-  }
-
-  public options: any = {
-    locale: { format: "YYYY-MM-DD" },
-    alwaysShowCalendars: false
-  };
-  public selectedDate(value: any) {
-    this.requestDetails.startDate = value.begin;
-    this.requestDetails.reportDate = value.end;
-    delete this.requestDetails["begin"];
-    delete this.requestDetails["end"];
-    console.log(this.requestDetails);
-    this.validSelection = true;
-    this.message = "Request sent successfully!";
-  }
-
-  myFilter = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    // To prevent Saturday and Sunday from being selected.
-    return day !== 0 && day !== 6;
-  };
-
-  inlineRangeChange($event) {
-    this.inlineRange = $event;
-  }
 
   ngOnInit() {}
 
   onSubmit() {
-    console.log(this.form.value);
-    this.openId
-      .makeAholidayRequest(this.form.value)
-      .subscribe(date => console.log(date));
-    this.msgShow = true;
+    console.log(this.regForm.value)
+    this.openId.makeAholidayRequest(this.regForm.value).subscribe(date => console.log(date))
   }
 }
