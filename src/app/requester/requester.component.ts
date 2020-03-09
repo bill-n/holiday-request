@@ -2,8 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
 import { ActivatedRoute } from "@angular/router";
 import { OpenidService } from "../service/openid.service";
-import { validateHorizontalPosition } from "@angular/cdk/overlay";
-import { checkServerIdentity } from 'tls';
+import { validateHorizontalPosition } from "@angular/cdk/overlay"
 
 export interface PeriodicElement {
   request_start_date: string;
@@ -44,7 +43,7 @@ export class RequesterComponent implements OnInit {
         });
       });
     };
-          
+    
           this.openId.postValidateTokeId(localStorage.getItem("idToken")).subscribe(res => {
             console.log(res);
             localStorage.setItem("userEmail", res.decoded_token.email);
