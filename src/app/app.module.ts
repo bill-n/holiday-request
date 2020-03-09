@@ -20,6 +20,7 @@ import { LoginComponent } from "./login/login.component";
 import { Daterangepicker, DaterangepickerConfig } from "ng2-daterangepicker";
 import { SatDatepickerModule, SatNativeDateModule } from "saturn-datepicker";
 import { OpenidService } from "./service/openid.service";
+import { CookieService } from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -47,11 +48,11 @@ import { OpenidService } from "./service/openid.service";
     Daterangepicker,
     SatDatepickerModule,
     SatNativeDateModule,
-    
+
     // NgxAaaDatepickerModule
     HttpClientModule
   ],
-  providers: [OpenidService, DaterangepickerConfig],
+  providers: [OpenidService, DaterangepickerConfig, CookieService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
