@@ -3,6 +3,7 @@ import { MatTableDataSource } from "@angular/material";
 import { ActivatedRoute } from "@angular/router";
 import { OpenidService } from "../service/openid.service";
 import { validateHorizontalPosition } from "@angular/cdk/overlay";
+import { checkServerIdentity } from 'tls';
 
 export interface PeriodicElement {
   request_start_date: string;
@@ -31,6 +32,7 @@ export class RequesterComponent implements OnInit {
   }
 
   ngOnInit() {
+    if( localStorage.getItem("idToken") === null){
     this.activatedRoute.queryParamMap.subscribe(queryParam => {
       console.log("********** insidopenIde auth", queryParam.get("code"));
       this.openId
@@ -39,12 +41,16 @@ export class RequesterComponent implements OnInit {
           console.log("token", response);
           this.idToken = response.id_token;
           localStorage.setItem("idToken",this.idToken)
+        });
+      });
+    };
+          
           this.openId.postValidateTokeId(localStorage.getItem("idToken")).subscribe(res => {
             console.log(res);
             localStorage.setItem("userEmail", res.decoded_token.email);
             localStorage.setItem("l_name", res.decoded_token.family_name);
             localStorage.setItem("f_name", res.decoded_token.given_name);
-
+          
             this.openId
               .checkEmployeePresence(res.decoded_token.email)
               .subscribe(response => {
@@ -75,10 +81,7 @@ export class RequesterComponent implements OnInit {
                 }
               });
           });
-        });
-    });
-  }
-
+}
   displayedColumns: string[] = ["request_start_date", "request_report_date", "req_status"];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
