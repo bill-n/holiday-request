@@ -13,6 +13,7 @@ import { ApproverComponent } from "./approver/approver.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatDatepickerModule, MatNativeDateModule } from "@angular/material";
 import { MatButtonModule } from "@angular/material/button";
+
 // import { NgxAaaDatepickerModule } from 'ngx-aaa-datepicker';
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { LoginComponent } from "./login/login.component";
@@ -20,7 +21,6 @@ import { Daterangepicker, DaterangepickerConfig } from "ng2-daterangepicker";
 import { SatDatepickerModule, SatNativeDateModule } from "saturn-datepicker";
 import { OpenidService } from "./service/openid.service";
 import { CookieService } from "ngx-cookie-service";
-
 
 @NgModule({
   declarations: [
@@ -47,8 +47,10 @@ import { CookieService } from "ngx-cookie-service";
     MatButtonModule,
     Daterangepicker,
     SatDatepickerModule,
-    SatNativeDateModule
+    SatNativeDateModule,
+
     // NgxAaaDatepickerModule
+    HttpClientModule
   ],
   providers: [OpenidService, DaterangepickerConfig, CookieService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
