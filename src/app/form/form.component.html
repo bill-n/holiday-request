@@ -1,44 +1,35 @@
+<div class="text-center mes" *ngIf="msgShow == true">
+  <div class="alert alert-danger" *ngIf="validSelection == false" role="alert">
+    {{ message }}
+  </div>
+  <div class="alert alert-success" *ngIf="validSelection == true" role="alert">
+    {{ message }}
+  </div>
+</div>
+
 <div class="row heading">
   <h2>Book A Time Off</h2>
 </div>
 <div class="container-fluid">
-  <form action="" [formGroup]="regForm" (ngSubmit)="onSubmit()">
+  <form action="" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="row formshift">
       <mat-form-field>
-        <mat-label>Start date</mat-label>
         <input
-          (dateChange)="addEvent('start', $event)"
+          (dateChange)="selectedDate($event.value)"
           matInput
-          [matDatepickerFilter]="startFilter"
+          [(ngModel)]="requestDetails"
+          [ngModelOptions]="{ standalone: true }"
+          [matDatepickerFilter]="myFilter"
           [min]="startMinDate"
           [max]="startMaxDate"
-          [matDatepicker]="startpicker"
+          placeholder="Choose a date"
+          [satDatepicker]="picker"
         />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="startpicker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #startpicker startView="year"></mat-datepicker>
+        <sat-datepicker #picker [rangeMode]="true"> </sat-datepicker>
+        <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
       </mat-form-field>
     </div>
-    <div class="row formshift">
-      <mat-form-field >
-        <mat-label>Report date</mat-label>
-        <input
-          (dateChange)="addEvent('report', $event)"
-          matInput
-          [matDatepickerFilter]="reportFilter"
-          [min]="reportMinDate"
-          [max]="reportMaxDate"
-          [matDatepicker]="reportpicker"
-        />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="reportpicker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #reportpicker startView="year"></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <button mat-raised-button color="primary" type="submit" >Submit</button>
+
+    <button mat-raised-button type="submit" color="primary">Submit</button>
   </form>
 </div>

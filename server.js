@@ -8,12 +8,13 @@ const app = express();
 
 app.use(cookieParser());
 
+
 app.use(
-  // To protect the cookies
+  
   cookieSession({
     name: "session",
     keys: [process.env.SECRET],
-    maxAge: 2 * 24 * 60 * 1000 // For just 1 day
+    maxAge: 2 * 24 * 60 * 1000 
   })
 );
 
@@ -21,6 +22,9 @@ app.use(express.static(__dirname + "/dist/Holiday-Me"));
 
 app.get("/*", function(req, res) {
   res.cookie("backend_url", process.env.REQUESTS_SERVICE);
+  res.cookie("tokenurl", process.env.Backend_tokenRequestUrl);
+  res.cookie("oidc", process.env.oidc);
+  
   res.sendFile(path.join(__dirname + "/dist/Holiday-Me/index.html"));
 });
 

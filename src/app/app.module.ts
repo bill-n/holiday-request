@@ -20,7 +20,6 @@ import { SatDatepickerModule, SatNativeDateModule } from "saturn-datepicker";
 import { OpenidService } from "./service/openid.service";
 import { CookieService } from "ngx-cookie-service";
 
-
 @NgModule({
   declarations: [
     AppComponent,
