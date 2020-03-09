@@ -31,20 +31,21 @@ export class RequesterComponent implements OnInit {
   }
 
   ngOnInit() {
-    if( localStorage.getItem("idToken") === null){
     this.activatedRoute.queryParamMap.subscribe(queryParam => {
       console.log("********** insidopenIde auth", queryParam.get("code"));
+    if( localStorage.getItem("idToken") === null){
+
       this.openId
         .postAuthenticationCodForAccessAndIdToken(queryParam.get("code"))
         .subscribe(response => {
           console.log("token", response);
           this.idToken = response.id_token;
           localStorage.setItem("idToken",this.idToken)
-        });
+        })};
       });
-    };
     
-          this.openId.postValidateTokeId(localStorage.getItem("idToken")).subscribe(res => {
+    
+            this.openId.postValidateTokeId(localStorage.getItem("idToken")).subscribe(res => {
             console.log(res);
             localStorage.setItem("userEmail", res.decoded_token.email);
             localStorage.setItem("l_name", res.decoded_token.family_name);
