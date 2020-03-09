@@ -8,18 +8,16 @@ import { CookieService } from "ngx-cookie-service";
 })
 export class OpenidService {
   private holidayRequestUrl: string;
-
-  
-  [x: string]: any;
-  private _tokenRequestUrl:string;
-  private oidc_url:string;
+  private _tokenRequestUrl: string;
+  private oidc_url: string;
   private validateTokenUrl = this.holidayRequestUrl + "validate";
-  private addUnavailableEmployeeUrl = this.holidayRequestUrl + "addemployee"
+  private addUnavailableEmployeeUrl = this.holidayRequestUrl + "addemployee";
   private checkEmail = this.holidayRequestUrl + "verifymail/";
-  private getRequestsForEmployeeUrl = this.holidayRequestUrl + "request/requester/";
-  private makeRequestLink = this.holidayRequestUrl + "request"
+  private getRequestsForEmployeeUrl =
+    this.holidayRequestUrl + "request/requester/";
+  private makeRequestLink = this.holidayRequestUrl + "request";
 
-  constructor(private http: HttpClient, private cookieservice:CookieService) {
+  constructor(private http: HttpClient, private cookieservice: CookieService) {
     this.holidayRequestUrl = this.cookieservice.get("backend_url");
     this._tokenRequestUrl = this.cookieservice.get("tokenurl");
     this.oidc_url = this.cookieservice.get("oidc");
@@ -30,10 +28,7 @@ export class OpenidService {
     let headers = new HttpHeaders({
       "Content-Type": "application/x-www-form-urlencoded"
     });
-    let body =
-      "code=" +
-      authenticationCode +
-      this.oidc_url;
+    let body = "code=" + authenticationCode + this.oidc_url;
     return this.http.post<any>(this._tokenRequestUrl, body, {
       headers: headers
     });
