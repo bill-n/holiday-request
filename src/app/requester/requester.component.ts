@@ -33,15 +33,13 @@ export class RequesterComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe(queryParam => {
       console.log("********** insidopenIde auth", queryParam.get("code"));
-    if( localStorage.getItem("idToken") === null){
-
       this.openId
         .postAuthenticationCodForAccessAndIdToken(queryParam.get("code"))
         .subscribe(response => {
           console.log("token", response);
           this.idToken = response.id_token;
           localStorage.setItem("idToken",this.idToken)
-        })};
+        })
       });
     
     
