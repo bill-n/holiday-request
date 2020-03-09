@@ -3,7 +3,6 @@ import { MatTableDataSource } from "@angular/material";
 import { ActivatedRoute } from "@angular/router";
 import { OpenidService } from "../service/openid.service";
 import { validateHorizontalPosition } from "@angular/cdk/overlay";
-import { checkServerIdentity } from 'tls';
 
 export interface PeriodicElement {
   request_start_date: string;
