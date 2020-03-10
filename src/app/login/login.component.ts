@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe(queryParam => {
       this.authenticationCode = queryParam.get("code");
-      this.oidc_redirect_path = this.cookieService.get("oidc_redirect");
+      this.oidc_redirect_path = this.openId.backend_oidc;
       console.log(this.oidc_redirect_path);
       console.log("********** insidopenIde auth", this.authenticationCode);
 
