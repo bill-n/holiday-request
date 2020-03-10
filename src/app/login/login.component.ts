@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { OpenidService } from "../service/openid.service";
 import { ActivatedRoute } from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
   selector: "app-login",
@@ -11,19 +12,21 @@ export class LoginComponent implements OnInit {
   authenticationCode;
   idToken;
   isValid = false;
-  oidc_redirect_path;
+  oidc_redirect_path = this.cookieService.get("oidc_redirect");
 
   constructor(
     private openId: OpenidService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private cookieService: CookieService
   ) {
-    this.oidc_redirect_path = this.openId.backend_oidc;
+    //this.oidc_redirect_path = cookieService.get("oidc_redirect");
   }
 
   ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe(queryParam => {
       this.authenticationCode = queryParam.get("code");
-
+      console.log(this.openId.getopenID);
+      console.log(this.oidc_redirect_path);
       console.log("********** insidopenIde auth", this.authenticationCode);
 
       // this.oidService._postAuthCodForAccessAndIdToken(this._authCode);

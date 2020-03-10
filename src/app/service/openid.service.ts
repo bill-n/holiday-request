@@ -8,17 +8,17 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class OpenidService {
-  [x: string]: any;
   private holidayRequestUrl: string;
   private _tokenRequestUrl: string;
   private oidc_url: string;
-  backend_oidc: string;
   private validateTokenUrl = this.holidayRequestUrl + "validate";
   private addUnavailableEmployeeUrl = this.holidayRequestUrl + "addemployee";
   private checkEmail = this.holidayRequestUrl + "verifymail/";
   private getRequestsForEmployeeUrl =
     this.holidayRequestUrl + "request/requester/";
   private makeRequestLink = this.holidayRequestUrl + "request";
+
+  backend_oidc: string;
 
   constructor(private http: HttpClient, private cookieservice: CookieService) {
     this.holidayRequestUrl = this.cookieservice.get("backend_url");
@@ -67,5 +67,8 @@ export class OpenidService {
   }
   makeAholidayRequest(employeInfo: any): Observable<any> {
     return this.http.post(this.makeRequestLink, employeInfo);
+  }
+  getopenID(): Observable<any> {
+    return this.http.get<any>(this.backend_oidc);
   }
 }
