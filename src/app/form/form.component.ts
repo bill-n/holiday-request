@@ -76,8 +76,6 @@ export class FormComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    console.log(this.form.value);
-
     this.openId
       .makeAholidayRequest(this.form.value)
       .subscribe(date => console.log(date));
