@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { HttpClientModule } from "@angular/common/http";
-import { Requester } from "../form/requester";
 import { CookieService } from "ngx-cookie-service";
 import { Observable } from "rxjs";
 @Injectable({
@@ -31,10 +29,6 @@ export class OpenidService {
     this.getRequestsForEmployeeUrl =
       this.holidayRequestUrl + "request/requester/";
     this.makeRequestLink = this.holidayRequestUrl + "request";
-
-    console.log(this.holidayRequestUrl);
-    console.log(this.validateTokenUrl);
-    console.log(this.backend_oidc);
   }
   postAuthenticationCodForAccessAndIdToken(
     authenticationCode: string
@@ -77,8 +71,5 @@ export class OpenidService {
   }
   makeAholidayRequest(employeInfo: any): Observable<any> {
     return this.http.post(this.makeRequestLink, employeInfo);
-  }
-  getopenID(): Observable<any> {
-    return this.http.get<any>(this.backend_oidc);
   }
 }

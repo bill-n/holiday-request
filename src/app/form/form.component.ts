@@ -1,8 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
-import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import { OpenidService } from "../service/openid.service";
-import { Requester } from "./requester";
 import { MakingRequest } from "../makingRequest";
 import {
   DaterangepickerComponent,
@@ -31,13 +29,7 @@ export class FormComponent implements OnInit {
   message: string =
     "Invalid selection! Please refresh the page and make a valid selection!";
 
-  private picker: DaterangepickerComponent;
-
-  constructor(
-    formBuilder: FormBuilder,
-    private openId: OpenidService,
-    private daterangepickerOptions: DaterangepickerConfig
-  ) {
+  constructor(private openId: OpenidService) {
     const currentYear = new Date().getFullYear();
     this.startMinDate = new Date();
     this.startMaxDate = new Date(currentYear, 11, 31);
@@ -67,7 +59,6 @@ export class FormComponent implements OnInit {
       .setValue(this.requestDetails.reportDate);
     delete this.requestDetails["begin"];
     delete this.requestDetails["end"];
-    console.log(this.requestDetails);
     this.validSelection = true;
     this.message = "Request sent successfully!";
   }

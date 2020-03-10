@@ -25,14 +25,6 @@ export class LoginComponent implements OnInit {
     this.activatedRoute.queryParamMap.subscribe(queryParam => {
       this.authenticationCode = queryParam.get("code");
       this.oidc_redirect_path = this.openId.backend_oidc;
-      console.log(this.oidc_redirect_path);
-      console.log("********** insidopenIde auth", this.authenticationCode);
-
-      // this.oidService._postAuthCodForAccessAndIdToken(this._authCode);
-      // this.openId.postAuthenticationCodForAccessAndIdToken(this.authenticationCode).subscribe(response => {
-      //   console.log(response)
-      // this.idToken = response.id_token
-      // })
     });
   }
 }
