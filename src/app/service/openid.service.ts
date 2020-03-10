@@ -25,6 +25,7 @@ export class OpenidService {
     this._tokenRequestUrl = this.cookieservice.get("tokenurl");
     this.oidc_url = this.cookieservice.get("oidc");
     this.backend_oidc = this.cookieservice.get("oidc_redirect");
+    console.log(this.holidayRequestUrl);
   }
   postAuthenticationCodForAccessAndIdToken(
     authenticationCode: string
