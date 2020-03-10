@@ -8,13 +8,11 @@ const app = express();
 
 app.use(cookieParser());
 
-
 app.use(
-  
   cookieSession({
     name: "session",
     keys: [process.env.SECRET],
-    maxAge: 2 * 24 * 60 * 1000 
+    maxAge: 2 * 24 * 60 * 1000
   })
 );
 
@@ -24,7 +22,8 @@ app.get("/*", function(req, res) {
   res.cookie("backend_url", process.env.REQUESTS_SERVICE);
   res.cookie("tokenurl", process.env.Backend_tokenRequestUrl);
   res.cookie("oidc", process.env.oidc);
-  
+  res.cookie("oidc_redirect", process.env.oidc_redirect);
+
   res.sendFile(path.join(__dirname + "/dist/Holiday-Me/index.html"));
 });
 

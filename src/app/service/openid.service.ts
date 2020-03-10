@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from "@angular/common/http";
 import { Requester } from "../form/requester";
 import { CookieService } from "ngx-cookie-service";
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
 @Injectable({
   providedIn: "root"
 })
@@ -12,6 +12,7 @@ export class OpenidService {
   private holidayRequestUrl: string;
   private _tokenRequestUrl: string;
   private oidc_url: string;
+  backend_oidc: string;
   private validateTokenUrl = this.holidayRequestUrl + "validate";
   private addUnavailableEmployeeUrl = this.holidayRequestUrl + "addemployee";
   private checkEmail = this.holidayRequestUrl + "verifymail/";
@@ -23,6 +24,7 @@ export class OpenidService {
     this.holidayRequestUrl = this.cookieservice.get("backend_url");
     this._tokenRequestUrl = this.cookieservice.get("tokenurl");
     this.oidc_url = this.cookieservice.get("oidc");
+    this.backend_oidc = this.cookieservice.get("oidc_redirect");
   }
   postAuthenticationCodForAccessAndIdToken(
     authenticationCode: string
