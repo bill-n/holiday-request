@@ -54,24 +54,24 @@ export class FormComponent implements OnInit {
     )
   });
 
-  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    if (type === "start") {
-      this.form.get("request_start_date").setValue(event.value);
-      console.log(
-        `${type}: ${event.value} -> ${
-          this.form.get("request_start_date").value
-        }`
-      );
-      console.log(` ${this.form.get("request_report_date").value}`);
-    } else if (type === "report") {
-      this.form.get("request_report_date").setValue(event.value);
-      console.log(
-        `${type}: ${event.value} -> ${
-          this.form.get("request_report_date").value
-        }`
-      );
-    }
-  }
+  // addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+  //   if (type === "start") {
+  //     this.form.get("request_start_date").setValue(event.value);
+  //     console.log(
+  //       `${type}: ${event.value} -> ${
+  //         this.form.get("request_start_date").value
+  //       }`
+  //     );
+  //     console.log(` ${this.form.get("request_report_date").value}`);
+  //   } else if (type === "report") {
+  //     this.form.get("request_report_date").setValue(event.value);
+  //     console.log(
+  //       `${type}: ${event.value} -> ${
+  //         this.form.get("request_report_date").value
+  //       }`
+  //     );
+  //   }
+  // }
 
   public options: any = {
     locale: { format: "YYYY-MM-DD" },
@@ -101,6 +101,10 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     console.log(this.form.value);
+    this.form.get(this.requestDetails.startDate).value;
+    this.form.get(this.requestDetails.reportDate).value;
+    console.log(this.form.value);
+
     this.openId
       .makeAholidayRequest(this.form.value)
       .subscribe(date => console.log(date));
