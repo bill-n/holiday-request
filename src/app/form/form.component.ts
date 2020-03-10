@@ -79,7 +79,11 @@ export class FormComponent implements OnInit {
   };
   public selectedDate(value: any) {
     this.requestDetails.startDate = value.begin;
+    this.form.get("request_start_date").setValue(this.requestDetails.startDate);
     this.requestDetails.reportDate = value.end;
+    this.form
+      .get("request_report_date")
+      .setValue(this.requestDetails.reportDate);
     delete this.requestDetails["begin"];
     delete this.requestDetails["end"];
     console.log(this.requestDetails);
@@ -100,9 +104,6 @@ export class FormComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    console.log(this.form.value);
-    this.form.get(this.requestDetails.startDate).value;
-    this.form.get(this.requestDetails.reportDate).value;
     console.log(this.form.value);
 
     this.openId
