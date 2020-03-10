@@ -12,11 +12,10 @@ export class OpenidService {
   private _tokenRequestUrl: string;
   private oidc_url: string;
   private validateTokenUrl;
-  private addUnavailableEmployeeUrl = this.holidayRequestUrl + "addemployee";
-  private checkEmail = this.holidayRequestUrl + "verifymail/";
-  private getRequestsForEmployeeUrl =
-    this.holidayRequestUrl + "request/requester/";
-  private makeRequestLink = this.holidayRequestUrl + "request";
+  private addUnavailableEmployeeUrl;
+  private checkEmail;
+  private getRequestsForEmployeeUrl;
+  private makeRequestLink;
 
   backend_oidc: string;
 
@@ -25,9 +24,17 @@ export class OpenidService {
     this._tokenRequestUrl = this.cookieservice.get("tokenurl");
     this.oidc_url = this.cookieservice.get("oidc");
     this.backend_oidc = this.cookieservice.get("oidc_redirect");
+
     this.validateTokenUrl = this.holidayRequestUrl + "validate";
+    this.addUnavailableEmployeeUrl = this.holidayRequestUrl + "addemployee";
+    this.checkEmail = this.holidayRequestUrl + "verifymail/";
+    this.getRequestsForEmployeeUrl =
+      this.holidayRequestUrl + "request/requester/";
+    this.makeRequestLink = this.holidayRequestUrl + "request";
+
     console.log(this.holidayRequestUrl);
     console.log(this.validateTokenUrl);
+    console.log(this.backend_oidc);
   }
   postAuthenticationCodForAccessAndIdToken(
     authenticationCode: string
