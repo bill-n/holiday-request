@@ -56,25 +56,44 @@ export class OpenIdService {
   }
 
   getUserDetails(): Observable<any> {
-    return this.http.get<any>(this.validateTokenUrl);
+    let headers = new HttpHeaders();
+    let head = headers.append("access-token", localStorage.getItem("idToken"));
+    return this.http.get<any>(this.validateTokenUrl,{
+      headers: head
+    });
   }
 
   addEmployee(requestBody: any): Observable<any> {
     let body = JSON.stringify(requestBody);
-    let headers = new HttpHeaders({ "Content-Type": "application/json" });
+    let headers = new HttpHeaders({ 
+      "Content-Type": "application/json",
+      "access-token":  localStorage.getItem("idToken")
+    });
 
     return this.http.post<any>(this.addUnavailableEmployeeUrl, body, {
       headers: headers
     });
   }
   checkEmployeePresence(employeeEmail: String): Observable<any> {
-    return this.http.get(this.checkEmail + employeeEmail);
+    let headers = new HttpHeaders();
+    let head = headers.append("access-token", localStorage.getItem("idToken"));
+    return this.http.get(this.checkEmail + employeeEmail,{
+      headers: head
+    });
   }
 
   getAllRequestForEmployee(employee_id: Number): Observable<any> {
-    return this.http.get(this.getRequestsForEmployeeUrl + employee_id);
+    let headers = new HttpHeaders();
+    let head = headers.append("access-token", localStorage.getItem("idToken"));
+    return this.http.get(this.getRequestsForEmployeeUrl + employee_id,{
+      headers: head
+    });
   }
   makeAholidayRequest(employeInfo: any): Observable<any> {
-    return this.http.post(this.makeRequestLink, employeInfo);
+    let headers = new HttpHeaders();
+    let head = headers.append("access-token", localStorage.getItem("idToken"));
+    return this.http.post(this.makeRequestLink, employeInfo,{
+      headers: head
+    });
   }
 }
