@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { OpenIdService } from "../service/openId.service";
 import { ActivatedRoute } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
-import { environment } from "./../../environments/environment";
 
 @Component({
   selector: "app-login",
