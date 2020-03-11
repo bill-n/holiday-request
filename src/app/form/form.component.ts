@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
-import { OpenidService } from "../service/openid.service";
+import { OpenIdService } from "../service/openId.service";
 import { MakingRequest } from "../makingRequest";
 import {
   DaterangepickerComponent,
@@ -11,7 +11,7 @@ import {
   selector: "app-form",
   templateUrl: "./form.component.html",
   styleUrls: ["./form.component.css"],
-  providers: [OpenidService]
+  providers: [OpenIdService]
 })
 export class FormComponent implements OnInit {
   startMinDate: Date;
@@ -29,7 +29,7 @@ export class FormComponent implements OnInit {
   message: string =
     "Invalid selection! Please refresh the page and make a valid selection!";
 
-  constructor(private openId: OpenidService) {
+  constructor(private openId: OpenIdService) {
     const currentYear = new Date().getFullYear();
     this.startMinDate = new Date();
     this.startMaxDate = new Date(currentYear, 11, 31);
@@ -78,7 +78,6 @@ export class FormComponent implements OnInit {
   onSubmit() {
     this.openId
       .makeAholidayRequest(this.form.value)
-      .subscribe(date => console.log(date));
     this.msgShow = true;
   }
 }

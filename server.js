@@ -19,10 +19,10 @@ app.use(
 app.use(express.static(__dirname + "/dist/Holiday-Me"));
 
 app.get("/*", function(req, res) {
-  res.cookie("backend_url", process.env.REQUESTS_SERVICE);
-  res.cookie("tokenurl", process.env.Backend_tokenRequestUrl);
-  res.cookie("oidc", process.env.oidc);
-  res.cookie("oidc_redirect", process.env.oidc_redirect);
+  res.cookie("holiday_request_service_url", process.env.HOLIDAY_REQUESTS_SERVICE_URL);
+  res.cookie("token_request_url", process.env.TOKEN_REQUEST_URL);
+  res.cookie("oidc_client_id", process.env.OIDC_CLIENT_ID);
+  res.cookie("redirect_page_to_oidc", process.env.REDIRECT_PAGE_TO_OIDC);
 
   res.sendFile(path.join(__dirname + "/dist/Holiday-Me/index.html"));
 });

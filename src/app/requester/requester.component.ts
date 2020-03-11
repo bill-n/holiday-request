@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
 import { ActivatedRoute } from "@angular/router";
-import { OpenidService } from "../service/openid.service";
+import { OpenIdService } from "../service/openId.service";
 import { validateHorizontalPosition } from "@angular/cdk/overlay";
 
 export interface PeriodicElement {
@@ -21,14 +21,14 @@ export class RequesterComponent implements OnInit {
   ELEMENT_DATA: PeriodicElement[];
 
   constructor(
-    private openId: OpenidService,
+    private openId: OpenIdService,
     private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe(queryParam => {
       this.openId
-        .postAuthenticationCodForAccessAndIdToken(queryParam.get("code"))
+        .postAuthenticationCodeForAccessAndIdToken(queryParam.get("code"))
         .subscribe(response => {
           this.idToken = response.id_token;
           localStorage.setItem("idToken", this.idToken);
