@@ -74,6 +74,7 @@ export class OpenIdService {
       headers: headers
     });
   }
+  
   checkEmployeePresence(employeeEmail: String): Observable<any> {
     let headers = new HttpHeaders();
     let head = headers.append("access-token", localStorage.getItem("idToken"));
@@ -89,6 +90,7 @@ export class OpenIdService {
       headers: head
     });
   }
+
   makeAholidayRequest(employeInfo: any): Observable<any> {
     let headers = new HttpHeaders();
     let head = headers.append("access-token", localStorage.getItem("idToken"));
