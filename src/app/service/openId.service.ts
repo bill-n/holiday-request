@@ -94,6 +94,7 @@ export class OpenIdService {
   makeAholidayRequest(employeInfo: any): Observable<any> {
     let headers = new HttpHeaders();
     let head = headers.append("access-token", localStorage.getItem("idToken"));
+    console.log("token | ", localStorage.getItem("idToken"));
     console.log("header | ", head);
     console.log("employeInfo | ", employeInfo);
     return this.http.post(this.makeRequestLink, employeInfo, {
