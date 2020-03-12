@@ -78,6 +78,7 @@ export class FormComponent implements OnInit {
   onSubmit() {
     this.openId
       .makeAholidayRequest(this.form.value)
+      .subscribe(date => console.log(date));
     this.msgShow = true;
   }
 }
