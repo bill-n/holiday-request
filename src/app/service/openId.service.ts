@@ -58,6 +58,7 @@ export class OpenIdService {
   getUserDetails(): Observable<any> {
     let headers = new HttpHeaders();
     let head = headers.append("access-token", localStorage.getItem("idToken"));
+    console.log("access token given |", localStorage.getItem("idToken"));
     return this.http.get<any>(this.validateTokenUrl, {
       headers: head
     });
