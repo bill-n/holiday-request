@@ -32,7 +32,7 @@ export class RequesterComponent implements OnInit {
         .subscribe(response => {
           this.idToken = response.id_token;
           localStorage.setItem("idToken", this.idToken);
-
+          console.log("response from id token |", this.idToken);
           this.openId
             .postValidateTokeId(localStorage.getItem("idToken"))
             .subscribe(res => {
