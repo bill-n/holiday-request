@@ -33,56 +33,56 @@ export class RequesterComponent implements OnInit {
           this.idToken = response.id_token;
           localStorage.setItem("idToken", this.idToken);
           console.log("response from id token |", this.idToken);
-          this.openId
-            .postValidateTokeId(localStorage.getItem("idToken"))
-            .subscribe(res => {
-              localStorage.setItem("userEmail", res.decoded_token.email);
-              localStorage.setItem("l_name", res.decoded_token.family_name);
-              localStorage.setItem("f_name", res.decoded_token.given_name);
+          // this.openId
+          //   .postValidateTokeId(localStorage.getItem("idToken"))
+          //   .subscribe(res => {
+          //     localStorage.setItem("userEmail", res.decoded_token.email);
+          //     localStorage.setItem("l_name", res.decoded_token.family_name);
+          //     localStorage.setItem("f_name", res.decoded_token.given_name);
 
-              this.openId
-                .checkEmployeePresence(res.decoded_token.email)
-                .subscribe(response => {
-                  if (response.response.length == 0) {
-                    let requestData = {
-                      employee_email: localStorage.getItem("userEmail"),
-                      employee_firstname: localStorage.getItem("f_name"),
-                      employee_lastname: localStorage.getItem("l_name")
-                    };
+          //     this.openId
+          //       .checkEmployeePresence(res.decoded_token.email)
+          //       .subscribe(response => {
+          //         if (response.response.length == 0) {
+          //           let requestData = {
+          //             employee_email: localStorage.getItem("userEmail"),
+          //             employee_firstname: localStorage.getItem("f_name"),
+          //             employee_lastname: localStorage.getItem("l_name")
+          //           };
 
-                    this.openId
-                      .addEmployee(requestData)
-                      .subscribe(response_ => {
-                        console.log(response_);
-                        this.userName =
-                          localStorage.getItem("f_name") +
-                          " " +
-                          localStorage.getItem("l_name");
-                        localStorage.setItem(
-                          "employee_id",
-                          response_.employee_id
-                        );
-                        console.log(localStorage.getItem("employee_id"));
-                      });
-                  } else {
-                    localStorage.setItem(
-                      "employee_id",
-                      response.response[0].employee_id
-                    );
-                    this.userName =
-                      localStorage.getItem("f_name") +
-                      " " +
-                      localStorage.getItem("l_name");
-                    this.openId
-                      .getAllRequestForEmployee(
-                        response.response[0].employee_id
-                      )
-                      .subscribe(data => {
-                        this.dataSource = new MatTableDataSource(data);
-                      });
-                  }
-                });
-            });
+          //           this.openId
+          //             .addEmployee(requestData)
+          //             .subscribe(response_ => {
+          //               console.log(response_);
+          //               this.userName =
+          //                 localStorage.getItem("f_name") +
+          //                 " " +
+          //                 localStorage.getItem("l_name");
+          //               localStorage.setItem(
+          //                 "employee_id",
+          //                 response_.employee_id
+          //               );
+          //               console.log(localStorage.getItem("employee_id"));
+          //             });
+          //         } else {
+          //           localStorage.setItem(
+          //             "employee_id",
+          //             response.response[0].employee_id
+          //           );
+          //           this.userName =
+          //             localStorage.getItem("f_name") +
+          //             " " +
+          //             localStorage.getItem("l_name");
+          //           this.openId
+          //             .getAllRequestForEmployee(
+          //               response.response[0].employee_id
+          //             )
+          //             .subscribe(data => {
+          //               this.dataSource = new MatTableDataSource(data);
+          //             });
+          //         }
+          //       });
+          //   });
         });
     });
   }
