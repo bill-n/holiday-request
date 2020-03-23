@@ -13,7 +13,8 @@ export class OpenIdService {
   private addUnavailableEmployeeUrl;
   private checkEmail;
   private getRequestsForEmployeeUrl;
-  private makeRequestLink;
+  private makeRequestLink ="http://localhost:7070/api/v1/request"
+  ";
 
   redirect_page_to_oidc: string;
 
