@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { OpenIdService } from "../service/openId.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
 
 @Component({
@@ -17,13 +17,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private openId: OpenIdService,
     private activatedRoute: ActivatedRoute,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) {}
 
-  ngOnInit() {
-    this.activatedRoute.queryParamMap.subscribe(queryParam => {
-      this.authenticationCode = queryParam.get("code");
-      this.oidc_redirect_path = this.openId.redirect_page_to_oidc;
-    });
-  }
+  ngOnInit() {}
 }
