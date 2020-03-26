@@ -14,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatDatepickerModule, MatNativeDateModule } from "@angular/material";
 import { MatButtonModule } from "@angular/material/button";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
-import { LoginComponent } from "./login/login.component";
 import { Daterangepicker, DaterangepickerConfig } from "ng2-daterangepicker";
 import { SatDatepickerModule, SatNativeDateModule } from "saturn-datepicker";
 import { OpenIdService } from "./service/openId.service";
@@ -24,7 +23,6 @@ import { NavigateComponent } from "./navigate/navigate.component";
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     RequesterComponent,
     FormComponent,
     ApproverComponent,
