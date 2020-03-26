@@ -24,6 +24,8 @@ export class NavigateComponent implements OnInit {
       this.authenticationCode = queryParam.get("code");
       this.oidc_redirect_path = this.openId.redirect_page_to_oidc;
     });
+    console.log("In navigate:" + this.openId.redirect_page_to_oidc);
+    console.log("oidc url also in navigate:" + this.oidc_redirect_path);
     this.router.navigate(["/"]).then(result => {
       window.location.href = this.oidc_redirect_path;
     });

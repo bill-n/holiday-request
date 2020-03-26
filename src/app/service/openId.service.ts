@@ -13,8 +13,7 @@ export class OpenIdService {
   private addUnavailableEmployeeUrl;
   private checkEmail;
   private getRequestsForEmployeeUrl;
-  private makeRequestLink ;
-
+  private makeRequestLink;
 
   redirect_page_to_oidc: string;
 
@@ -27,6 +26,7 @@ export class OpenIdService {
     this.redirect_page_to_oidc = this.cookieservice.get(
       "redirect_page_to_oidc"
     );
+    console.log("In Service:" + this.redirect_page_to_oidc);
 
     this.validateTokenUrl = this.holiday_request_service_url + "validate";
     this.addUnavailableEmployeeUrl =
