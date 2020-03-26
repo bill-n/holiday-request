@@ -19,6 +19,7 @@ import { Daterangepicker, DaterangepickerConfig } from "ng2-daterangepicker";
 import { SatDatepickerModule, SatNativeDateModule } from "saturn-datepicker";
 import { OpenIdService } from "./service/openId.service";
 import { CookieService } from "ngx-cookie-service";
+import { NavigateComponent } from "./navigate/navigate.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CookieService } from "ngx-cookie-service";
     LoginComponent,
     RequesterComponent,
     FormComponent,
-    ApproverComponent
+    ApproverComponent,
+    NavigateComponent
   ],
 
   imports: [
@@ -47,7 +49,6 @@ import { CookieService } from "ngx-cookie-service";
     SatDatepickerModule,
     SatNativeDateModule,
     HttpClientModule
-
   ],
   providers: [OpenIdService, DaterangepickerConfig, CookieService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
