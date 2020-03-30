@@ -25,7 +25,9 @@ export class NavigateComponent implements OnInit {
       this.oidc_redirect_path = this.openId.redirect_page_to_oidc;
     });
     this.router.navigate(["/"]).then(result => {
+      console.log("oidc_redirect_path: 28",this.oidc_redirect_path)
       window.location.href = this.oidc_redirect_path;
+      console.log("oidc_redirect_path: 30",this.oidc_redirect_path)
     });
   }
 }
