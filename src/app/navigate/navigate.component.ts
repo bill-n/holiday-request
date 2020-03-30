@@ -12,6 +12,7 @@ export class NavigateComponent implements OnInit {
   idToken;
   isValid = false;
   oidc_redirect_paths;
+  isLoading = false;
 
   constructor(
     private openId: OpenIdService,
@@ -22,6 +23,7 @@ export class NavigateComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe(queryParam => {
       this.authenticationCode = queryParam.get("code");
+      // this.isLoading=true;
       this.oidc_redirect_paths = this.openId.redirect_page_to_oidc;
       this.router.navigate(["/"]).then(result => {
         window.location.href = this.oidc_redirect_paths;

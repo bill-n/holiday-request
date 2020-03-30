@@ -19,6 +19,7 @@ import { SatDatepickerModule, SatNativeDateModule } from "saturn-datepicker";
 import { OpenIdService } from "./service/openId.service";
 import { CookieService } from "ngx-cookie-service";
 import { NavigateComponent } from "./navigate/navigate.component";
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NavigateComponent } from "./navigate/navigate.component";
     RequesterComponent,
     FormComponent,
     ApproverComponent,
-    NavigateComponent
+    NavigateComponent,
+    SpinnerComponent
   ],
 
   imports: [
