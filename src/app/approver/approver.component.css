@@ -1,0 +1,77 @@
+.side {
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  height: 7%;
+}
+
+h5 {
+  color: rgb(247, 246, 242);
+}
+.btn-circle {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.btn-circle i {
+  position: relative;
+  top: -1px;
+}
+
+.btn-circle-sm {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  font-size: 0.9rem;
+}
+
+.btn-circle-lg {
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  font-size: 1.1rem;
+}
+
+.btn-circle-xl {
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  font-size: 1.3rem;
+}
+.but {
+  margin-top: 5%;
+  margin-left: 10%;
+}
+.smallbut {
+  margin-top: -7%;
+  margin-left: 70%;
+}
+.row > h2 {
+  margin-left: 47%;
+  font-weight: bolder;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+.tabl {
+  margin-left: 17%;
+}
+table {
+  width: 80%;
+}
+.filterbox {
+  width: 80%;
+}
+
+.btn-lemon {
+  background-color: rgb(237, 252, 21);
+  border-color: rgb(237, 252, 21);
+}
+
+.btnStatus {
+  width: 100%;
+}
