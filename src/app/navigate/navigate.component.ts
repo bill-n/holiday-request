@@ -11,7 +11,7 @@ export class NavigateComponent implements OnInit {
   authenticationCode;
   idToken;
   isValid = false;
-  oidc_redirect_paths;
+  oidc_redirect_path;
   isLoading = false;
 
   constructor(
@@ -23,11 +23,11 @@ export class NavigateComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe(queryParam => {
       this.authenticationCode = queryParam.get("code");
-      this.oidc_redirect_paths = this.openId.redirect_page_to_oidc;
+      this.oidc_redirect_path = this.openId.redirect_page_to_oidc;
     });
       this.router.navigate(["/"]).then(result => {
         this.isLoading = true;
-        window.location.href = this.oidc_redirect_paths;
+        window.location.href = this.oidc_redirect_path;
       
     });
   }
