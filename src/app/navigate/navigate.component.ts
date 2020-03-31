@@ -24,11 +24,11 @@ export class NavigateComponent implements OnInit {
     this.activatedRoute.queryParamMap.subscribe(queryParam => {
       this.authenticationCode = queryParam.get("code");
       this.oidc_redirect_paths = this.openId.redirect_page_to_oidc;
-
+    });
       this.router.navigate(["/"]).then(result => {
         this.isLoading = true;
         window.location.href = this.oidc_redirect_paths;
-      });
+      
     });
   }
 }
