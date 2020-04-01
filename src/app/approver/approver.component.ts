@@ -74,9 +74,7 @@ export class ApproverComponent implements OnInit {
                       " " +
                       localStorage.getItem("l_name");
                     this.openId
-                      .getAllRequestForEmployee(
-                        response.response[0].employee_id
-                      )
+                      .getAllRequests(response.response[0].employee_id)
                       .subscribe(data => {
                         this.dataSource = new MatTableDataSource(data);
                       });
