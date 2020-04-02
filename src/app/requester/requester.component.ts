@@ -58,6 +58,7 @@ export class RequesterComponent implements OnInit {
                           localStorage.getItem("f_name") +
                           " " +
                           localStorage.getItem("l_name");
+                          console.log(this.userName);
                         localStorage.setItem(
                           "employee_id",
                           response_.employee_id
