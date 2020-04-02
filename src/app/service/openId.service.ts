@@ -77,11 +77,10 @@ export class OpenIdService {
   }
 
   checkEmployeePresence(employeeEmail: String): Observable<any> {
-    let headers = new HttpHeaders();
-    let head = headers.append("access-token", localStorage.getItem("idToken"));
-    return this.http.get(this.checkEmail + employeeEmail, {
-      headers: head
-    });
+    // let headers = new HttpHeaders();
+    // let head = headers.append("access-token", localStorage.getItem("idToken"));
+    return this.http.get(this.checkEmail + employeeEmail
+    );
   }
 
   getAllRequestForEmployee(employee_id: Number): Observable<any> {
