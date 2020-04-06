@@ -13,6 +13,7 @@ export class OpenIdService {
   private addUnavailableEmployeeUrl;
   private checkEmail;
   private getRequestsForEmployeeUrl;
+  private getAllRequestsUrl;
   private makeRequestLink;
 
   redirect_page_to_oidc: string;
@@ -33,6 +34,7 @@ export class OpenIdService {
     this.checkEmail = this.holiday_request_service_url + "verifymail/";
     this.getRequestsForEmployeeUrl =
       this.holiday_request_service_url + "request/requester/";
+    this.getAllRequestsUrl = this.holiday_request_service_url + "requests";
     this.makeRequestLink = this.holiday_request_service_url + "request";
   }
   postAuthenticationCodeForAccessAndIdToken(
@@ -87,6 +89,14 @@ export class OpenIdService {
     let headers = new HttpHeaders();
     let head = headers.append("access-token", localStorage.getItem("idToken"));
     return this.http.get(this.getRequestsForEmployeeUrl + employee_id, {
+      headers: head
+    });
+  }
+
+  getAllRequests(employee_id: Number): Observable<any> {
+    let headers = new HttpHeaders();
+    let head = headers.append("access-token", localStorage.getItem("idToken"));
+    return this.http.get(this.getAllRequestsUrl, {
       headers: head
     });
   }
