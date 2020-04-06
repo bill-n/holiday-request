@@ -30,9 +30,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
   },
   {
     position: 3,
-    requester_name: "Patricia Serwaa Agyekum Kodie",
+    requester_name: "Patricia Serwaa Agyekum K.",
     request_start_date: "Wednesday, 15th, April, 2020",
-    request_report_date: "Wednesday, 22nd April, 2020",
+    request_report_date: "Tuesday, 22nd April, 2020",
     req_status: "APPROVE"
   },
   {
@@ -74,7 +74,8 @@ export class ApproverComponent implements OnInit {
   idToken;
   userrequest_start_date: String;
   ELEMENT_DATA: PeriodicElement[];
-
+  approved: boolean;
+  declined: boolean;
   constructor(
     private openId: OpenIdService,
     private activatedRoute: ActivatedRoute
@@ -165,24 +166,30 @@ export class ApproverComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  btnColor(status: string, buttontype: string) {
-    if (status === "DECLINE") {
-      if (buttontype === "Decline") {
-        return "btn-danger";
-      } else {
-        return "btn-success";
-      }
-    } else if (status === "APPROVE") {
-      if (buttontype === "Approve") {
-        return "btn-success";
-      } else {
-        return "btn-danger";
-      }
-    } else {
-      return "btn-lemon";
-    }
+  btnApproveShow() {
+    return "btn-success";
+  }
+  btnDeclineShow() {
+    return "btn-danger";
+  }
+  btnColor(status: string) {
+    if (status === "APPROVE") {
+      this.btnApproveShow();
+    } else if (status === "DECLINE") {
+      this.btnDeclineShow();
+    } else {}
   }
 
+  // btnColor(req_status: string) {
+  //   if (req_status === "DECLINED") {
+  //     return "btn-danger";
+  //   } else if (req_status === "APPROVED") {
+  //     return "btn-success";
+  //   } else {
+  //     return "btn-lemon";
+  //   }
+  // }
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
