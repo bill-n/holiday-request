@@ -18,6 +18,7 @@ export interface PeriodicElement {
 export class RequesterComponent implements OnInit {
   idToken;
   userName: String;
+  employee_email: String;
   ELEMENT_DATA: PeriodicElement[];
 
   constructor(
