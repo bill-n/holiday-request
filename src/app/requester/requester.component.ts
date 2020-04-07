@@ -19,7 +19,7 @@ export class RequesterComponent implements OnInit {
   idToken;
   userName: String;
   ELEMENT_DATA: PeriodicElement[];
-
+  employee_email: String;
   constructor(
     private openId: OpenIdService,
     private activatedRoute: ActivatedRoute
@@ -39,7 +39,7 @@ export class RequesterComponent implements OnInit {
               localStorage.setItem("userEmail", res.decoded_token.email);
               localStorage.setItem("l_name", res.decoded_token.family_name);
               localStorage.setItem("f_name", res.decoded_token.given_name);
-
+              this.employee_email = localStorage.getItem("userEmail");
               this.openId
                 .checkEmployeePresence(res.decoded_token.email)
                 .subscribe(response => {
