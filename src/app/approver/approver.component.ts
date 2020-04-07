@@ -167,17 +167,17 @@ export class ApproverComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   btnApproveShow() {
-    return "btn-success";
+    return "btnApproved";
   }
   btnDeclineShow() {
-    return "btn-danger";
+    return "btnDeclined";
   }
   btnColor(status: string) {
     if (status === "APPROVE") {
       this.btnApproveShow();
     } else if (status === "DECLINE") {
       this.btnDeclineShow();
-    } else {}
+    }
   }
 
   // btnColor(req_status: string) {
@@ -189,7 +189,7 @@ export class ApproverComponent implements OnInit {
   //     return "btn-lemon";
   //   }
   // }
-  
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

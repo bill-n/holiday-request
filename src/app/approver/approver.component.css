@@ -80,54 +80,42 @@ mat-button-toggle-group {
   box-shadow: black;
 }
 
-mat-button-toggle.btnApprove {
-  border: 1px rgb(72, 250, 1) solid !important;
-  /* padding-left: -10px !important; */
-  width: 80px;
-  height: 30px;
-  font-family: "Nunito Semibold", sans-serif;
-  font-size: 14px;
-  font-style: bold;
-  line-height: 30px;
-  padding: 0 0px;
-  padding-top: 0px;
-  padding-right: 0px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-}
+/* mat-button-toggle.btnApprove {
+  border: 1px rgb(72, 250, 1) solid !important; */
 
-mat-button-toggle.btnDecline {
-  border: 1px rgb(241, 9, 9) solid !important;
-  /* padding-left: -10px !important; */
-  /* padding-top: -3px; */
-  width: 80px;
+/* width: 80px;
   height: 30px;
   font-family: "Nunito Semibold", sans-serif;
   font-size: 14px;
-  font-style: bold;
-  line-height: 30px;
+  font-style: bold; */
+/* line-height: 30px;
   padding: 0 0px;
   padding-top: 0px;
   padding-right: 0px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-}
+  padding-bottom: 40px;
+  padding-left: 0px; */
+/* } */
+
+/* mat-button-toggle.btnDecline {
+  border: 1px rgb(241, 9, 9) solid !important; */
+/* padding-left: -10px !important; */
+/* padding-top: -3px; */
+/* width: 80px;
+  height: 30px;
+  font-family: "Nunito Semibold", sans-serif;
+  font-size: 14px;
+  font-style: bold; */
+/* line-height: 30px;
+  padding: 0 0px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 40px;
+  padding-left: 0px; */
+/* } */
 
 /* .center {
   text-align: left;
 } */
-
-mat-button-toggle.btnApprove:hover {
-  border: 1px #000 solid !important;
-  background-color: rgb(51, 248, 2) !important;
-  border-radius: 5px !important;
-}
-
-mat-button-toggle.btnDecline:hover {
-  border: 1px #000 solid !important;
-  background-color: rgb(248, 3, 3) !important;
-  border-radius: 5px !important;
-}
 
 .mat-button-toggle-checked.btnApprove {
   box-shadow: 0 0 30px #000 !important;
@@ -142,11 +130,45 @@ mat-button-toggle.btnDecline:hover {
   border-radius: 5px !important;
   background-color: rgb(241, 9, 9) !important;
 }
-.idawud {
-  line-height: 30px;
-  padding: 0 0px;
-  padding-top: 0px;
-  padding-right: 0px;
-  padding-bottom: 0px;
-  padding-left: 0px;
+
+.btnApprove {
+  width: 49%;
+  margin: 0px 5px 0px 0px;
+  border: 1px solid rgb(51, 248, 2);
+  color: rgb(51, 248, 2);
+  border-radius: 5px !important;
+}
+
+.btnDecline {
+  width: 49%;
+  border: 1px solid rgb(248, 3, 3);
+  color: rgb(248, 3, 3);
+  border-radius: 5px !important;
+}
+
+.btnApprove:hover {
+  color: #fff;
+  background-color: rgb(51, 248, 2) !important;
+  border: none;
+}
+
+.btnDecline:hover {
+  color: #fff;
+  background-color: rgb(248, 3, 3) !important;
+  border: none;
+}
+
+.btnApproved {
+  color: #fff;
+  background-color: rgb(51, 248, 2) !important;
+  border: none;
+}
+
+.btnDeclined {
+  color: #fff;
+  background-color: rgb(248, 3, 3) !important;
+  border: none;
+}
+.centerAll {
+  display: flex;
 }
