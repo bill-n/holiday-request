@@ -42,8 +42,6 @@ export class RequesterComponent implements OnInit {
               localStorage.setItem("f_name", res.decoded_token.given_name);
               this.employee_email = localStorage.getItem("userEmail");
               
-
-
               this.openId
                 .checkEmployeePresence(res.decoded_token.email)
                 .subscribe(response => {
