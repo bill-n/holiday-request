@@ -18,7 +18,6 @@ export interface PeriodicElement {
 export class RequesterComponent implements OnInit {
   idToken;
   userName: String;
-  employee_email;
   ELEMENT_DATA: PeriodicElement[];
 
   constructor(
@@ -40,8 +39,7 @@ export class RequesterComponent implements OnInit {
               localStorage.setItem("userEmail", res.decoded_token.email);
               localStorage.setItem("l_name", res.decoded_token.family_name);
               localStorage.setItem("f_name", res.decoded_token.given_name);
-this.employee_email = localStorage.getItem("userEmail");
-console.log("employee_email", this.employee_email);
+
               this.openId
                 .checkEmployeePresence(res.decoded_token.email)
                 .subscribe(response => {
