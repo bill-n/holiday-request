@@ -41,7 +41,7 @@ export class RequesterComponent implements OnInit {
               localStorage.setItem("l_name", res.decoded_token.family_name);
               localStorage.setItem("f_name", res.decoded_token.given_name);
               this.employee_email = localStorage.getItem("userEmail");
-
+              console.log('email |', localStorage.getItem('userEmail'));
               // console.log("my email", localStorage.getItem("userEmail"));
               this.openId
                 .checkEmployeePresence(res.decoded_token.email)
@@ -52,7 +52,7 @@ export class RequesterComponent implements OnInit {
                       employee_firstname: localStorage.getItem("f_name"),
                       employee_lastname: localStorage.getItem("l_name"),
                     };
-          this.employee_email = localStorage.getItem("userEmail");
+          // this.employee_email = localStorage.getItem("userEmail");
                     this.openId
                       .addEmployee(requestData)
                       .subscribe((response_) => {
@@ -65,7 +65,7 @@ export class RequesterComponent implements OnInit {
                           "employee_id",
                           response_.employee_id
                         );
-                        console.log(localStorage.getItem("employee_id"));
+                        // console.log(localStorage.getItem("employee_id"));
                       });
                   } else {
                     localStorage.setItem(
@@ -88,7 +88,7 @@ export class RequesterComponent implements OnInit {
             });
         });
     });
-    this.employee_email = localStorage.getItem("userEmail");
+    // this.employee_email = localStorage.getItem("userEmail");
   }
  
   displayedColumns: string[] = [
