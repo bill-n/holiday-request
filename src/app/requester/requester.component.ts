@@ -40,6 +40,7 @@ export class RequesterComponent implements OnInit {
               localStorage.setItem("l_name", res.decoded_token.family_name);
               localStorage.setItem("f_name", res.decoded_token.given_name);
               this.employee_email = localStorage.getItem("userEmail");
+              console.log("Employee email is ", localStorage.getItem("userEmail"));
 
               this.openId
                 .checkEmployeePresence(res.decoded_token.email)
