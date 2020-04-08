@@ -19,7 +19,7 @@ export class RequesterComponent implements OnInit {
   idToken;
   userName: String;
   ELEMENT_DATA: PeriodicElement[];
-  employee_email = "Requester Email";
+  employee_email: String;
   constructor(
     private openId: OpenIdService,
     private activatedRoute: ActivatedRoute
