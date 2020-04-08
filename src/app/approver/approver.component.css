@@ -67,68 +67,21 @@ table {
   width: 80%;
 }
 
-.btn-lemon {
-  background-color: rgb(237, 252, 21);
-  border-color: rgb(237, 252, 21);
-}
-
-/* .btnStatus {
-  width: 100%;
-} */
-
 mat-button-toggle-group {
   box-shadow: black;
 }
-
-/* mat-button-toggle.btnApprove {
-  border: 1px rgb(72, 250, 1) solid !important; */
-
-/* width: 80px;
-  height: 30px;
-  font-family: "Nunito Semibold", sans-serif;
-  font-size: 14px;
-  font-style: bold; */
-/* line-height: 30px;
-  padding: 0 0px;
-  padding-top: 0px;
-  padding-right: 0px;
-  padding-bottom: 40px;
-  padding-left: 0px; */
-/* } */
-
-/* mat-button-toggle.btnDecline {
-  border: 1px rgb(241, 9, 9) solid !important; */
-/* padding-left: -10px !important; */
-/* padding-top: -3px; */
-/* width: 80px;
-  height: 30px;
-  font-family: "Nunito Semibold", sans-serif;
-  font-size: 14px;
-  font-style: bold; */
-/* line-height: 30px;
-  padding: 0 0px;
-  padding-top: 0px;
-  padding-right: 0px;
-  padding-bottom: 40px;
-  padding-left: 0px; */
-/* } */
-
-/* .center {
-  text-align: left;
-} */
-
 .mat-button-toggle-checked.btnApprove {
   box-shadow: 0 0 30px #000 !important;
-  border: 1px #000 solid !important;
   border-radius: 5px !important;
   background-color: rgb(24, 248, 3) !important;
+  color: #fff;
 }
 
 .mat-button-toggle-checked.btnDecline {
   box-shadow: 0 0 10px #000 !important;
-  border: 1px rgb(233, 250, 1) solid !important;
   border-radius: 5px !important;
   background-color: rgb(241, 9, 9) !important;
+  color: #fff;
 }
 
 .btnApprove {
@@ -159,12 +112,15 @@ mat-button-toggle-group {
 }
 
 .btnApproved {
+  width: 49%;
+  margin: 0px 5px 0px 0px;
   color: #fff;
   background-color: rgb(51, 248, 2) !important;
   border: none;
 }
 
 .btnDeclined {
+  width: 49%;
   color: #fff;
   background-color: rgb(248, 3, 3) !important;
   border: none;

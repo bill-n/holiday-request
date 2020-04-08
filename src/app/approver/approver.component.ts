@@ -166,30 +166,6 @@ export class ApproverComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  btnApproveShow() {
-    return "btnApproved";
-  }
-  btnDeclineShow() {
-    return "btnDeclined";
-  }
-  btnColor(status: string) {
-    if (status === "APPROVE") {
-      this.btnApproveShow();
-    } else if (status === "DECLINE") {
-      this.btnDeclineShow();
-    }
-  }
-
-  // btnColor(req_status: string) {
-  //   if (req_status === "DECLINED") {
-  //     return "btn-danger";
-  //   } else if (req_status === "APPROVED") {
-  //     return "btn-success";
-  //   } else {
-  //     return "btn-lemon";
-  //   }
-  // }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
