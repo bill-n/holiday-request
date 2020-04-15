@@ -5,7 +5,7 @@ import { OpenIdService } from "../service/openId.service";
 @Component({
   selector: "app-navigate",
   templateUrl: "./navigate.component.html",
-  styleUrls: ["./navigate.component.css"]
+  styleUrls: ["./navigate.component.css"],
 })
 export class NavigateComponent implements OnInit {
   authenticationCode;
@@ -21,14 +21,15 @@ export class NavigateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.queryParamMap.subscribe(queryParam => {
+    this.activatedRoute.queryParamMap.subscribe((queryParam) => {
       this.authenticationCode = queryParam.get("code");
       this.oidc_redirect_path = this.openId.redirect_page_to_oidc;
-    
-      this.router.navigate(["/"]).then(result => {
+
+      this.router.navigate(["/"]).then((result) => {
         this.isLoading = true;
-        window.location.href = "https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20email&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&redirect_uri=https://holiday-requester.herokuapp.com/requester&response_type=code&client_id=859455735473-bgmqqco3q588kgaog0g2k0fmnur5qvf9.apps.googleusercontent.com&hd=turntabl.io";
-      }); 
+        window.location.href =
+          "https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20email&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&redirect_uri=https://holiday-requester.herokuapp.com/requester&response_type=code&client_id=859455735473-bgmqqco3q588kgaog0g2k0fmnur5qvf9.apps.googleusercontent.com&hd=turntabl.io&prompt=consent";
+      });
     });
   }
 }
