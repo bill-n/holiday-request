@@ -24,13 +24,13 @@
 <div class="tabl">
   <mat-form-field class="filterbox">
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. day" />
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. name" />
   </mat-form-field>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
     <!-- Position Column -->
     <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
       <td mat-cell *matCellDef="let element">
         {{ element.position }}
       </td>
@@ -38,7 +38,7 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="requester_name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
       <td mat-cell *matCellDef="let element">
         {{ element.requester_name }}
       </td>
@@ -46,7 +46,7 @@
 
     <!-- Start Date Column -->
     <ng-container matColumnDef="request_start_date">
-      <th mat-header-cell *matHeaderCellDef>Start Date</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
       <td mat-cell *matCellDef="let element">
         {{ element.request_start_date }}
       </td>
@@ -54,7 +54,7 @@
 
     <!-- Reporting Date Column -->
     <ng-container matColumnDef="request_report_date">
-      <th mat-header-cell *matHeaderCellDef>Report Date</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Report Date</th>
       <td mat-cell *matCellDef="let element">
         {{ element.request_report_date }}
       </td>
@@ -62,37 +62,68 @@
 
     <!-- Status Column -->
     <ng-container matColumnDef="req_status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
       <td mat-cell *matCellDef="let element">
-        <!-- <button
-          [ngClass]="['btnStatus', btnColor(element.req_status, Approve)]"
-          type="button"
-        >
-          APPROVE
-        </button>
-        <button
-          [ngClass]="['btnStatus', btnColor(element.req_status, Decline)]"
-          type="button"
-        >
-          DECLINE
-        </button> -->
-        <div class="center">
+        <div *ngIf="element.req_status == 'PENDING'">
           <mat-button-toggle-group
+            class="centerAll"
             [(ngModel)]="direction"
             #singleGroup="matButtonToggleGroup"
           >
-            <mat-button-toggle class="btnApprove btnStatus idawud">
+            <mat-button-toggle
+              class="btnApprove"
+              (click)="toggleClass(btnApprove)"
+            >
               APPROVE
             </mat-button-toggle>
-            <mat-button-toggle class="btnDecline btnStatus idawud"
-              >DECLINE
+            <mat-button-toggle
+              class="btnDecline"
+              (click)="toggleClass(btnDecline)"
+            >
+              DECLINE
             </mat-button-toggle>
           </mat-button-toggle-group>
         </div>
-        <!-- [ngClass] = "[btnColor(element.req_status)]" -->
+
+        <div
+          *ngIf="
+            element.req_status != 'PENDING' && element.req_status == 'APPROVE'
+          "
+        >
+          <mat-button-toggle-group
+            class="centerAll"
+            [(ngModel)]="direction"
+            #singleGroup="matButtonToggleGroup"
+          >
+            <mat-button-toggle class="btnApproved">
+              APPROVED
+            </mat-button-toggle>
+            <mat-button-toggle class="btnDecline">
+              DECLINE
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+
+        <div
+          *ngIf="
+            element.req_status != 'PENDING' && element.req_status == 'DECLINE'
+          "
+        >
+          <mat-button-toggle-group
+            class="centerAll"
+            [(ngModel)]="direction"
+            #singleGroup="matButtonToggleGroup"
+          >
+            <mat-button-toggle class="btnApprove">
+              APPROVE
+            </mat-button-toggle>
+            <mat-button-toggle class="btnDeclined">
+              DECLINED
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
       </td>
     </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
