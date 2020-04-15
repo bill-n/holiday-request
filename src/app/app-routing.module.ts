@@ -5,6 +5,7 @@ import { FormComponent } from "./form/form.component";
 import { OpenIdService } from "./service/openId.service";
 import { ApproverComponent } from "./approver/approver.component";
 import { NavigateComponent } from "./navigate/navigate.component";
+import { MatSortModule } from "@angular/material";
 
 const routes: Routes = [
   { path: "", redirectTo: "/navigate", pathMatch: "full" },
@@ -16,11 +17,12 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    MatSortModule,
     RouterModule.forRoot(
       routes,
       { enableTracing: true, onSameUrlNavigation: "reload" } // <-- debugging purposes only
     )
   ],
-  exports: [RouterModule]
+  exports: [RouterModule, MatSortModule]
 })
 export class AppRoutingModule {}
