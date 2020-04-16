@@ -67,7 +67,6 @@
         <div *ngIf="element.req_status == 'PENDING'">
           <mat-button-toggle-group
             class="centerAll"
-            [(ngModel)]="direction"
             #singleGroup="matButtonToggleGroup"
           >
             <mat-button-toggle
@@ -92,7 +91,6 @@
         >
           <mat-button-toggle-group
             class="centerAll"
-            [(ngModel)]="direction"
             #singleGroup="matButtonToggleGroup"
           >
             <mat-button-toggle class="btnApproved">
@@ -111,7 +109,6 @@
         >
           <mat-button-toggle-group
             class="centerAll"
-            [(ngModel)]="direction"
             #singleGroup="matButtonToggleGroup"
           >
             <mat-button-toggle class="btnApprove">
