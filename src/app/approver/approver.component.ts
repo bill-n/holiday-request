@@ -77,7 +77,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: "./approver.component.html",
   styleUrls: ["./approver.component.css"]
 })
-
 export class ApproverComponent implements OnInit {
   idToken;
   userrequest_start_date: String;
@@ -179,7 +178,7 @@ export class ApproverComponent implements OnInit {
     "request_report_date",
     "req_status"
   ];
-  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
