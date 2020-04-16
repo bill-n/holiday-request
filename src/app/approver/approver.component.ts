@@ -81,8 +81,8 @@ export class ApproverComponent implements OnInit {
   idToken;
   userrequest_start_date: String;
   ELEMENT_DATA: PeriodicElement[];
-  approved: boolean;
-  declined: boolean;
+  // approved: boolean;
+  // declined: boolean;
 
   constructor(
     private openId: OpenIdService,
@@ -185,9 +185,9 @@ export class ApproverComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  toggleClass(whichButton: string) {
-    let btn = document.querySelectorAll(".btnApprove");
-  }
+  // toggleClass(whichButton: string) {
+  //   let btn = document.querySelectorAll(".btnApprove");
+  // }
 
   // if (whichButton == "btnApprove") {
   //   return "btnApproved";
