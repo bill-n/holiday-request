@@ -5,8 +5,7 @@ import { OpenIdService } from "../service/openId.service";
 import { validateHorizontalPosition } from "@angular/cdk/overlay";
 
 export interface PeriodicElement {
-  position: number;
-  requester_name: string;
+  employee_email: string;
   request_start_date: string;
   request_report_date: string;
   req_status: string;
@@ -79,8 +78,10 @@ export interface PeriodicElement {
 })
 export class ApproverComponent implements OnInit {
   idToken;
+  userName: String;
   userrequest_start_date: String;
   ELEMENT_DATA: PeriodicElement[];
+  employee_email;
   // approved: boolean;
   // declined: boolean;
 
@@ -95,6 +96,74 @@ export class ApproverComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  // ngOnInit() {
+  //   this.activatedRoute.queryParamMap.subscribe(queryParam => {
+  //     this.openId
+  //       .postAuthenticationCodeForAccessAndIdToken(queryParam.get("code"))
+  //       .subscribe(response => {
+  //         this.idToken = response.id_token;
+  //         localStorage.setItem("idToken", this.idToken);
+  //         console.log("response from id token |", this.idToken);
+  //         this.openId
+  //           .postValidateTokeId(localStorage.getItem("idToken"))
+  //           .subscribe(res => {
+  //             localStorage.setItem("userEmail", res.decoded_token.email);
+  //             localStorage.setItem(
+  //               "l_request_start_date",
+  //               res.decoded_token.family_request_start_date
+  //             );
+  //             localStorage.setItem(
+  //               "f_request_start_date",
+  //               res.decoded_token.given_request_start_date
+  //             );
+  //             this.openId
+  //               .checkEmployeePresence(res.decoded_token.email)
+  //               .subscribe(response => {
+  //                 if (response.response.length == 0) {
+  //                   let requestData = {
+  //                     employee_email: localStorage.getItem("userEmail"),
+  //                     employee_firstrequest_start_date: localStorage.getItem(
+  //                       "f_request_start_date"
+  //                     ),
+  //                     employee_lastrequest_start_date: localStorage.getItem(
+  //                       "l_request_start_date"
+  //                     )
+  //                   };
+  //                   this.openId
+  //                     .addEmployee(requestData)
+  //                     .subscribe(response_ => {
+  //                       console.log(response_);
+  //                       this.userrequest_start_date =
+  //                         localStorage.getItem("f_request_start_date") +
+  //                         " " +
+  //                         localStorage.getItem("l_request_start_date");
+  //                       localStorage.setItem(
+  //                         "employee_id",
+  //                         response_.employee_id
+  //                       );
+  //                       console.log(localStorage.getItem("employee_id"));
+  //                     });
+  //                 } else {
+  //                   localStorage.setItem(
+  //                     "employee_id",
+  //                     response.response[0].employee_id
+  //                   );
+  //                   this.userrequest_start_date =
+  //                     localStorage.getItem("f_request_start_date") +
+  //                     " " +
+  //                     localStorage.getItem("l_request_start_date");
+  //                   this.openId
+  //                     .getAllRequests(response.response[0].employee_id)
+  //                     .subscribe(data => {
+  //                       this.dataSource = new MatTableDataSource(data);
+  //                     });
+  //                 }
+  //               });
+  //           });
+  //       });
+  //   });
+  // }
+
   ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe(queryParam => {
       this.openId
@@ -102,57 +171,54 @@ export class ApproverComponent implements OnInit {
         .subscribe(response => {
           this.idToken = response.id_token;
           localStorage.setItem("idToken", this.idToken);
-          console.log("response from id token |", this.idToken);
+          console.log("response from id token|", this.idToken);
           this.openId
             .postValidateTokeId(localStorage.getItem("idToken"))
             .subscribe(res => {
               localStorage.setItem("userEmail", res.decoded_token.email);
-              localStorage.setItem(
-                "l_request_start_date",
-                res.decoded_token.family_request_start_date
-              );
-              localStorage.setItem(
-                "f_request_start_date",
-                res.decoded_token.given_request_start_date
-              );
+              localStorage.setItem("l_name", res.decoded_token.family_name);
+              localStorage.setItem("f_name", res.decoded_token.given_name);
+              this.employee_email = localStorage.getItem("userEmail");
+              console.log("email |", localStorage.getItem("userEmail"));
+              // console.log("my email", localStorage.getItem("userEmail"));
               this.openId
                 .checkEmployeePresence(res.decoded_token.email)
                 .subscribe(response => {
                   if (response.response.length == 0) {
                     let requestData = {
                       employee_email: localStorage.getItem("userEmail"),
-                      employee_firstrequest_start_date: localStorage.getItem(
-                        "f_request_start_date"
-                      ),
-                      employee_lastrequest_start_date: localStorage.getItem(
-                        "l_request_start_date"
-                      )
+                      employee_firstname: localStorage.getItem("f_name"),
+                      employee_lastname: localStorage.getItem("l_name")
                     };
+                    // this.employee_email = localStorage.getItem("userEmail");
                     this.openId
                       .addEmployee(requestData)
                       .subscribe(response_ => {
                         console.log(response_);
-                        this.userrequest_start_date =
-                          localStorage.getItem("f_request_start_date") +
+                        this.userName =
+                          localStorage.getItem("f_name") +
                           " " +
-                          localStorage.getItem("l_request_start_date");
+                          localStorage.getItem("l_name");
+                        console.log("username is ", this.userName);
                         localStorage.setItem(
                           "employee_id",
                           response_.employee_id
                         );
-                        console.log(localStorage.getItem("employee_id"));
+                        // console.log(localStorage.getItem("employee_id"));
                       });
                   } else {
                     localStorage.setItem(
                       "employee_id",
                       response.response[0].employee_id
                     );
-                    this.userrequest_start_date =
-                      localStorage.getItem("f_request_start_date") +
+                    this.userName =
+                      localStorage.getItem("f_name") +
                       " " +
-                      localStorage.getItem("l_request_start_date");
+                      localStorage.getItem("l_name");
                     this.openId
-                      .getAllRequests(response.response[0].employee_id)
+                      .getAllRequestForEmployee(
+                        response.response[0].employee_id
+                      )
                       .subscribe(data => {
                         this.dataSource = new MatTableDataSource(data);
                       });
@@ -161,6 +227,7 @@ export class ApproverComponent implements OnInit {
             });
         });
     });
+    // this.employee_email = localStorage.getItem("userEmail");
   }
 
   // displayedColumns: string[] = [
@@ -172,8 +239,7 @@ export class ApproverComponent implements OnInit {
 
   // TO TRY MY TABLE WITH STATIC DATA
   displayedColumns: string[] = [
-    "position",
-    "requester_name",
+    "employee_email",
     "request_start_date",
     "request_report_date",
     "req_status"
