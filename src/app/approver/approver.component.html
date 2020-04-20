@@ -69,7 +69,7 @@
             class="centerAll"
             #singleGroup="matButtonToggleGroup"
           >
-            <mat-button-toggle class="btnApprove">
+            <mat-button-toggle class="btnApprove" (click)="approveRequest(element.request_id)">
               APPROVE
             </mat-button-toggle>
             <mat-button-toggle class="btnDecline">

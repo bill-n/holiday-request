@@ -93,7 +93,7 @@ export class OpenIdService {
     });
   }
 
-  getAllRequests(employee_id: Number): Observable<any> {
+  getAllRequests(): Observable<any> {
     let headers = new HttpHeaders();
     let head = headers.append("access-token", localStorage.getItem("idToken"));
     return this.http.get(this.getAllRequestsUrl, {
