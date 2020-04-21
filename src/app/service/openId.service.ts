@@ -129,19 +129,17 @@ export class OpenIdService {
   }
 
   approveRequest(request_id: Number): Observable<any> {
-    let headers = new HttpHeaders();
-    let head = headers.append("access-token", localStorage.getItem("idToken"));
+    // let headers = new HttpHeaders();
+    // let head = headers.append("access-token", localStorage.getItem("idToken"));
     return this.http.put(this.approveRequestUrl + request_id, {
-      headers: head
+      // headers: head
     });
   }
 
   declineRequest(request_id: Number): Observable<any> {
-    let headers = new HttpHeaders();
-    let head = headers.append("access-token", localStorage.getItem("idToken"));
-    return this.http.put(this.declineRequestUrl + request_id, {
-      headers: head
-    });
+    // let headers = new HttpHeaders();
+    // let head = headers.append("access-token", localStorage.getItem("idToken"));
+    return this.http.put(this.declineRequestUrl + request_id, {});
   }
 
   makeAholidayRequest(employeInfo: any): Observable<any> {
