@@ -20,7 +20,7 @@ export class ApproverComponent implements OnInit {
   userName: String;
   ELEMENT_DATA: PeriodicElement[];
   employee_email;
-  
+
   constructor(
     private openId: OpenIdService,
     private activatedRoute: ActivatedRoute
@@ -29,7 +29,7 @@ export class ApproverComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe((queryParam) => {
       this.openId
-        .postAuthenticationCodeForAccessAndIdToken(queryParam.get("code"))
+        .postAuthenticationCodeForAccessAndIdTokenForApprover(queryParam.get("code"))
         .subscribe((response) => {
           this.idToken = response.id_token;
           localStorage.setItem("idToken", this.idToken);
@@ -41,7 +41,7 @@ export class ApproverComponent implements OnInit {
               localStorage.setItem("l_name", res.decoded_token.family_name);
               localStorage.setItem("f_name", res.decoded_token.given_name);
               this.employee_email = localStorage.getItem("userEmail");
-              console.log('email |', localStorage.getItem('userEmail'));
+              console.log("email |", localStorage.getItem("userEmail"));
               // console.log("my email", localStorage.getItem("userEmail"));
               this.openId
                 .checkEmployeePresence(res.decoded_token.email)
@@ -52,7 +52,7 @@ export class ApproverComponent implements OnInit {
                       employee_firstname: localStorage.getItem("f_name"),
                       employee_lastname: localStorage.getItem("l_name"),
                     };
-          // this.employee_email = localStorage.getItem("userEmail");
+                    // this.employee_email = localStorage.getItem("userEmail");
                     this.openId
                       .addEmployee(requestData)
                       .subscribe((response_) => {
@@ -90,7 +90,7 @@ export class ApproverComponent implements OnInit {
     });
     // this.employee_email = localStorage.getItem("userEmail");
   }
- 
+
   displayedColumns: string[] = [
     "request_start_date",
     "request_report_date",

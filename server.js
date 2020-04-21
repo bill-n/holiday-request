@@ -23,6 +23,8 @@ app.get("/*", function(req, res) {
   res.cookie("token_request_url", process.env.TOKEN_REQUEST_URL);
   res.cookie("oidc_client_id", process.env.OIDC_CLIENT_ID);
   res.cookie("redirect_page_to_oidc", process.env.REDIRECT_PAGE_TO_OIDC);
+  res.cookie("approver_redirect_page_to_oidc", process.env.APPROVER_REDIRECT_PAGE_TO_OIDC);
+  res.cookie("approver_oidc_client_id", process.env.APPROVER_OIDC_CLIENT_ID);
 
   res.sendFile(path.join(__dirname + "/dist/Holiday-Me/index.html"));
 });
