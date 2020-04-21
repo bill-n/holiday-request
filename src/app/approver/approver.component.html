@@ -28,6 +28,14 @@
   </mat-form-field>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Name Column -->
+    <ng-container matColumnDef="employee_email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.employee_email }}
+      </td>
+    </ng-container>
+
     <!-- Start Date Column -->
     <ng-container matColumnDef="request_start_date">
       <th mat-header-cell *matHeaderCellDef>Start Date</th>
@@ -46,17 +54,65 @@
 
     <!-- Status Column -->
     <ng-container matColumnDef="req_status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
       <td mat-cell *matCellDef="let element">
-        <button
-          [ngClass]="['btnStatus', 'btn', btnColor(element.req_status)]"
-          type="button"
+        <div *ngIf="element.req_status == 'PENDING'">
+          <mat-button-toggle-group
+            class="centerAll"
+            #singleGroup="matButtonToggleGroup"
+          >
+            <mat-button-toggle
+              class="btnApprove"
+              (click)="toApproveRequest(element.request_id)"
+            >
+              APPROVE
+            </mat-button-toggle>
+            <mat-button-toggle
+              class="btnDecline"
+              (click)="toDeclineRequest(element.request_id)"
+            >
+              DECLINE
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+
+        <div
+          *ngIf="
+            element.req_status != 'PENDING' && element.req_status == 'APPROVE'
+          "
         >
-          {{ element.req_status }}
-        </button>
+          <mat-button-toggle-group
+            class="centerAll"
+            #singleGroup="matButtonToggleGroup"
+          >
+            <mat-button-toggle class="btnApproved">
+              APPROVED
+            </mat-button-toggle>
+            <mat-button-toggle class="btnDecline">
+              DECLINE
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+
+        <div
+          *ngIf="
+            element.req_status != 'PENDING' && element.req_status == 'DECLINE'
+          "
+        >
+          <mat-button-toggle-group
+            class="centerAll"
+            #singleGroup="matButtonToggleGroup"
+          >
+            <mat-button-toggle class="btnApprove">
+              APPROVE
+            </mat-button-toggle>
+            <mat-button-toggle class="btnDeclined">
+              DECLINED
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
       </td>
     </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
