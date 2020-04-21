@@ -25,7 +25,7 @@ export class ApproverComponent implements OnInit {
   employee_email;
   // approved: boolean;
   // declined: boolean;
-  service: OpenIdService;
+  // service: OpenIdService;
 
   constructor(
     private openId: OpenIdService,
@@ -116,11 +116,11 @@ export class ApproverComponent implements OnInit {
   }
   toApproveRequest(request_id: number) {
     console.log(request_id);
-    this.service.approveRequest(request_id);
+    this.openId.approveRequest(request_id);
   }
 
   toDeclineRequest(request_id: number) {
     console.log(request_id);
-    this.service.declineRequest(request_id);
+    this.openId.declineRequest(request_id);
   }
 }
