@@ -15,6 +15,8 @@ export class OpenIdService {
   private getRequestsForEmployeeUrl;
   private getAllRequestsUrl;
   private makeRequestLink;
+  private approveRequestUrl;
+  private declineRequestUrl;
 
   redirect_page_to_oidc: string;
 
@@ -36,6 +38,10 @@ export class OpenIdService {
       this.holiday_request_service_url + "request/requester/";
     this.getAllRequestsUrl = this.holiday_request_service_url + "requests";
     this.makeRequestLink = this.holiday_request_service_url + "request";
+    this.approveRequestUrl =
+      this.holiday_request_service_url + "requests/approve/";
+    this.declineRequestUrl =
+      this.holiday_request_service_url + "requests/decline/";
   }
   postAuthenticationCodeForAccessAndIdToken(
     authenticationCode: string
@@ -81,8 +87,7 @@ export class OpenIdService {
   checkEmployeePresence(employeeEmail: String): Observable<any> {
     // let headers = new HttpHeaders();
     // let head = headers.append("access-token", localStorage.getItem("idToken"));
-    return this.http.get(this.checkEmail + employeeEmail
-    );
+    return this.http.get(this.checkEmail + employeeEmail);
   }
 
   getAllRequestForEmployee(employee_id: Number): Observable<any> {
@@ -97,6 +102,22 @@ export class OpenIdService {
     let headers = new HttpHeaders();
     let head = headers.append("access-token", localStorage.getItem("idToken"));
     return this.http.get(this.getAllRequestsUrl, {
+      headers: head
+    });
+  }
+
+  approveRequest(request_id: Number): Observable<any> {
+    let headers = new HttpHeaders();
+    let head = headers.append("access-token", localStorage.getItem("idToken"));
+    return this.http.put(this.approveRequestUrl + request_id, {
+      headers: head
+    });
+  }
+
+  declineRequest(request_id: Number): Observable<any> {
+    let headers = new HttpHeaders();
+    let head = headers.append("access-token", localStorage.getItem("idToken"));
+    return this.http.put(this.declineRequestUrl + request_id, {
       headers: head
     });
   }

@@ -13,64 +13,64 @@ export interface PeriodicElement {
 }
 
 // TO TRY MY TABLE WITH STATIC DATA
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    request_id: 1,
-    employee_email: "John Papa Kwesi Erbynn",
-    request_start_date: "Wednesday, 15th, April, 2020",
-    request_report_date: "Friday, 17th April, , 2020",
-    req_status: "PENDING"
-  },
-  {
-    request_id: 2,
-    employee_email: "Ali Fuseini",
-    request_start_date: "Wednesday, 15th, April, 2020",
-    request_report_date: "Friday, 17th April, 2020",
-    req_status: "PENDING"
-  },
-  {
-    request_id: 3,
-    employee_email: "Patricia Serwaa Agyekum K.",
-    request_start_date: "Wednesday, 15th, April, 2020",
-    request_report_date: "Tuesday, 22nd April, 2020",
-    req_status: "APPROVE"
-  },
-  {
-    request_id: 4,
-    employee_email: "John Papa Kwesi Erbynn",
-    request_start_date: "Wednesday, 15th, April, 2020",
-    request_report_date: "Friday, 17th April, 2020",
-    req_status: "DECLINE"
-  },
-  {
-    request_id: 5,
-    employee_email: "John Papa Kwesi Erbynn",
-    request_start_date: "Wednesday, 15th, April, 2020",
-    request_report_date: "Friday, 17th April, 2020",
-    req_status: "DECLINE"
-  },
-  {
-    request_id: 6,
-    employee_email: "John Papa Kwesi Erbynn",
-    request_start_date: "Wednesday, 15th, April, 2020",
-    request_report_date: "Friday, 17th April, 2020",
-    req_status: "APPROVE"
-  },
-  {
-    request_id: 7,
-    employee_email: "John Papa Kwesi Erbynn",
-    request_start_date: "Wednesday, 15th, April, 2020",
-    request_report_date: "Friday, 17th April, 2020",
-    req_status: "DECLINE"
-  },
-  {
-    request_id: 8,
-    employee_email: "John Papa Kwesi Erbynn",
-    request_start_date: "Wednesday, 15th, April, 2020",
-    request_report_date: "Friday, 17th April, 2020",
-    req_status: "PENDING"
-  }
-];
+// const ELEMENT_DATA: PeriodicElement[] = [
+//   {
+//     request_id: 1,
+//     employee_email: "John Papa Kwesi Erbynn",
+//     request_start_date: "Wednesday, 15th, April, 2020",
+//     request_report_date: "Friday, 17th April, , 2020",
+//     req_status: "PENDING"
+//   },
+//   {
+//     request_id: 2,
+//     employee_email: "Ali Fuseini",
+//     request_start_date: "Wednesday, 15th, April, 2020",
+//     request_report_date: "Friday, 17th April, 2020",
+//     req_status: "PENDING"
+//   },
+//   {
+//     request_id: 3,
+//     employee_email: "Patricia Serwaa Agyekum K.",
+//     request_start_date: "Wednesday, 15th, April, 2020",
+//     request_report_date: "Tuesday, 22nd April, 2020",
+//     req_status: "APPROVE"
+//   },
+//   {
+//     request_id: 4,
+//     employee_email: "John Papa Kwesi Erbynn",
+//     request_start_date: "Wednesday, 15th, April, 2020",
+//     request_report_date: "Friday, 17th April, 2020",
+//     req_status: "DECLINE"
+//   },
+//   {
+//     request_id: 5,
+//     employee_email: "John Papa Kwesi Erbynn",
+//     request_start_date: "Wednesday, 15th, April, 2020",
+//     request_report_date: "Friday, 17th April, 2020",
+//     req_status: "DECLINE"
+//   },
+//   {
+//     request_id: 6,
+//     employee_email: "John Papa Kwesi Erbynn",
+//     request_start_date: "Wednesday, 15th, April, 2020",
+//     request_report_date: "Friday, 17th April, 2020",
+//     req_status: "APPROVE"
+//   },
+//   {
+//     request_id: 7,
+//     employee_email: "John Papa Kwesi Erbynn",
+//     request_start_date: "Wednesday, 15th, April, 2020",
+//     request_report_date: "Friday, 17th April, 2020",
+//     req_status: "DECLINE"
+//   },
+//   {
+//     request_id: 8,
+//     employee_email: "John Papa Kwesi Erbynn",
+//     request_start_date: "Wednesday, 15th, April, 2020",
+//     request_report_date: "Friday, 17th April, 2020",
+//     req_status: "PENDING"
+//   }
+// ];
 
 @Component({
   selector: "app-approver",
@@ -85,6 +85,7 @@ export class ApproverComponent implements OnInit {
   employee_email;
   // approved: boolean;
   // declined: boolean;
+  service: OpenIdService;
 
   constructor(
     private openId: OpenIdService,
@@ -161,7 +162,7 @@ export class ApproverComponent implements OnInit {
   //   "request_report_date",
   //   "req_status"
   // ];
-  // dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
   // TO TRY MY TABLE WITH STATIC DATA
   displayedColumns: string[] = [
@@ -170,15 +171,21 @@ export class ApproverComponent implements OnInit {
     "request_report_date",
     "req_status"
   ];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  // dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  approveRequest(request_id: number) {
+  toApproveRequest(request_id: number) {
     console.log(request_id);
+    this.service.approveRequest(request_id);
+  }
+
+  toDeclineRequest(request_id: number) {
+    console.log(request_id);
+    this.service.declineRequest(request_id);
   }
 
   // if (whichButton == "btnApprove") {
