@@ -11,11 +11,11 @@ export interface PeriodicElement {
 }
 
 @Component({
-  selector: "app-requester",
-  templateUrl: "./requester.component.html",
-  styleUrls: ["./requester.component.css"],
+  selector: "app-approver",
+  templateUrl: "./approver.component.html",
+  styleUrls: ["./approver.component.css"],
 })
-export class RequesterComponent implements OnInit {
+export class ApproverComponent implements OnInit {
   idToken;
   userName: String;
   ELEMENT_DATA: PeriodicElement[];
