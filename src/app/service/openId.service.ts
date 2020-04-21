@@ -18,30 +18,28 @@ export class OpenIdService {
   private makeRequestLink;
   private approveRequestUrl;
   private declineRequestUrl;
- 
-  
-  
-  
-  
-  approver_redirect_page_to_oidc: string;
 
+  approver_redirect_page_to_oidc: string;
   redirect_page_to_oidc: string;
-  
 
   constructor(private http: HttpClient, private cookieservice: CookieService) {
     this.holiday_request_service_url = this.cookieservice.get(
       "holiday_request_service_url"
     );
-    this.approver_oidc_client_id = this.cookieservice.get("approver_oidc_client_id");
-  
 
     this.token_request_url = this.cookieservice.get("token_request_url");
     this.oidc_client_id = this.cookieservice.get("oidc_client_id");
+    this.approver_oidc_client_id = this.cookieservice.get(
+      "approver_oidc_client_id"
+    );
+
     this.redirect_page_to_oidc = this.cookieservice.get(
       "redirect_page_to_oidc"
     );
-    this.approver_redirect_page_to_oidc = this.cookieservice.get("approver_redirect_page_to_oidc");
-    
+    this.approver_redirect_page_to_oidc = this.cookieservice.get(
+      "approver_redirect_page_to_oidc"
+    );
+
     this.validateTokenUrl = this.holiday_request_service_url + "validate";
     this.addUnavailableEmployeeUrl =
       this.holiday_request_service_url + "addemployee";
@@ -73,13 +71,11 @@ export class OpenIdService {
     let headers = new HttpHeaders({
       "Content-Type": "application/x-www-form-urlencoded"
     });
-    let body = "code=" + authenticationCode + this.oidc_client_id;
-    return this.http.post<any>(this.approver_oidc_client_id, body, {
+    let body = "code=" + authenticationCode + this.approver_oidc_client_id;
+    return this.http.post<any>(this.token_request_url, body, {
       headers: headers
     });
   }
-
-
 
   postValidateTokeId(access_token: string): Observable<any> {
     let headers = new HttpHeaders();
