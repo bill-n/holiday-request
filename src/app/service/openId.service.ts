@@ -28,15 +28,17 @@ export class OpenIdService {
   redirect_page_to_oidc: string;
   
 
+
   constructor(private http: HttpClient, private cookieservice: CookieService) {
     this.holiday_request_service_url = this.cookieservice.get(
       "holiday_request_service_url"
     );
-    this.approver_oidc_client_id = this.cookieservice.get("approver_oidc_client_id");
   
 
     this.token_request_url = this.cookieservice.get("token_request_url");
     this.oidc_client_id = this.cookieservice.get("oidc_client_id");
+    this.approver_oidc_client_id = this.cookieservice.get("approver_oidc_client_id");
+    
     this.redirect_page_to_oidc = this.cookieservice.get(
       "redirect_page_to_oidc"
     );
