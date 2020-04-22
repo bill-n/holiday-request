@@ -131,7 +131,7 @@ export class OpenIdService {
   approveRequest(request_id: Number): Observable<any> {
     let headers = new HttpHeaders();
     let head = headers.append("access-token", localStorage.getItem("idToken"));
-    console.log('this is request id in approve request ', request_id)
+    
     return this.http.put(this.approveRequestUrl + request_id, {
       headers: head
     });
@@ -139,8 +139,9 @@ export class OpenIdService {
 
   declineRequest(request_id: Number): Observable<any> {
     let headers = new HttpHeaders();
+    // let body = JSON.stringify(requestBody);
     let head = headers.append("access-token", localStorage.getItem("idToken"));
-    console.log('this is request id in decline request ', request_id)
+    // console.log('this is request id in decline request ', request_id)
     return this.http.put(this.declineRequestUrl + request_id, { headers: head});
    
   }
