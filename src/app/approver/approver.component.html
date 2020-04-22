@@ -78,7 +78,7 @@
 
         <div
           *ngIf="
-            element.req_status != 'PENDING' && element.req_status == 'APPROVE'
+            element.req_status != 'PENDING' && element.req_status == 'APPROVED'
           "
         >
           <mat-button-toggle-group
@@ -96,7 +96,7 @@
 
         <div
           *ngIf="
-            element.req_status != 'PENDING' && element.req_status == 'DECLINE'
+            element.req_status != 'PENDING' && element.req_status == 'DECLINED'
           "
         >
           <mat-button-toggle-group
