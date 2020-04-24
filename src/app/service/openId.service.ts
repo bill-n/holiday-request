@@ -87,8 +87,11 @@ export class OpenIdService {
 
   getUserDetails(): Observable<any> {
     let headers = new HttpHeaders();
-    let head = headers.append("access-token", localStorage.getItem("idToken"));
-    console.log("access token given |", localStorage.getItem("idToken"));
+    let head = headers.append(
+      "access-token",
+      this.cookieservice.get("idToken")
+    );
+    console.log("access token given |", this.cookieservice.get("idToken"));
     return this.http.get<any>(this.validateTokenUrl, {
       headers: head
     });
@@ -98,7 +101,7 @@ export class OpenIdService {
     let body = JSON.stringify(requestBody);
     let headers = new HttpHeaders({
       "Content-Type": "application/json",
-      "access-token": localStorage.getItem("idToken")
+      "access-token": this.cookieservice.get("idToken")
     });
 
     return this.http.post<any>(this.addUnavailableEmployeeUrl, body, {
@@ -114,7 +117,10 @@ export class OpenIdService {
 
   getAllRequestForEmployee(employee_id: Number): Observable<any> {
     let headers = new HttpHeaders();
-    let head = headers.append("access-token", localStorage.getItem("idToken"));
+    let head = headers.append(
+      "access-token",
+      this.cookieservice.get("idToken")
+    );
     return this.http.get(this.getRequestsForEmployeeUrl + employee_id, {
       headers: head
     });
@@ -122,7 +128,10 @@ export class OpenIdService {
 
   getAllRequests(): Observable<any> {
     let headers = new HttpHeaders();
-    let head = headers.append("access-token", localStorage.getItem("idToken"));
+    let head = headers.append(
+      "access-token",
+      this.cookieservice.get("idToken")
+    );
     return this.http.get(this.getAllRequestsUrl, {
       headers: head
     });
@@ -130,8 +139,11 @@ export class OpenIdService {
 
   approveRequest(request_id: Number): Observable<any> {
     let headers = new HttpHeaders();
-    let head = headers.append("access-token", localStorage.getItem("idToken"));
-    
+    let head = headers.append(
+      "access-token",
+      this.cookieservice.get("idToken")
+    );
+
     return this.http.put(this.approveRequestUrl + request_id, {
       headers: head
     });
@@ -140,10 +152,14 @@ export class OpenIdService {
   declineRequest(request_id: Number): Observable<any> {
     let headers = new HttpHeaders();
     // let body = JSON.stringify(requestBody);
-    let head = headers.append("access-token", localStorage.getItem("idToken"));
+    let head = headers.append(
+      "access-token",
+      this.cookieservice.get("idToken")
+    );
     // console.log('this is request id in decline request ', request_id)
-    return this.http.put(this.declineRequestUrl + request_id, { headers: head});
-   
+    return this.http.put(this.declineRequestUrl + request_id, {
+      headers: head
+    });
   }
 
   makeAholidayRequest(employeInfo: any): Observable<any> {
