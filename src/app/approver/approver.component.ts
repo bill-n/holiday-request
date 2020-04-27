@@ -51,7 +51,7 @@ export class ApproverComponent implements OnInit {
           this.cookieService.set("idToken", this.idToken);
           console.log("response from id token|", this.idToken);
           this.openId
-            .postValidateTokeId(localStorage.getItem("idToken"))
+            .postValidateTokeId(this.cookieService.get("idToken"))
             .subscribe(res => {
               this.cookieService.set("userEmail", res.decoded_token.email);
               this.cookieService.set("l_name", res.decoded_token.family_name);
