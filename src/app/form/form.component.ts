@@ -18,7 +18,7 @@ export class FormComponent implements OnInit {
   startMaxDate: Date;
   reportMinDate: Date;
   reportMaxDate: Date;
-  startDateSet: Boolean;
+  startDateSet: Boolean; 
 
   inlineRange;
 
