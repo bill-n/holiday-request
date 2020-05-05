@@ -56,7 +56,7 @@ export class ApproverComponent implements OnInit {
               localStorage.setItem("f_name", res.decoded_token.given_name);
               this.employee_email = localStorage.getItem("userEmail");
               console.log("email |", localStorage.getItem("userEmail"));
-              // console.log("my email", localStorage.getItem("userEmail"));
+              
               this.openId
                 .checkEmployeePresence(res.decoded_token.email)
                 .subscribe(response => {
@@ -66,7 +66,7 @@ export class ApproverComponent implements OnInit {
                       employee_firstname: localStorage.getItem("f_name"),
                       employee_lastname: localStorage.getItem("l_name")
                     };
-                    // this.employee_email = localStorage.getItem("userEmail");
+            
                     this.openId
                       .addEmployee(requestData)
                       .subscribe(response_ => {
@@ -79,7 +79,7 @@ export class ApproverComponent implements OnInit {
                           "employee_id",
                           response_.employee_id
                         );
-                        // console.log(localStorage.getItem("employee_id"));
+              
                       });
                   } else {
                     localStorage.setItem(
@@ -98,7 +98,6 @@ export class ApproverComponent implements OnInit {
             });
         });
     });
-    // this.employee_email = localStorage.getItem("userEmail");
   }
 
   displayedColumns: string[] = [
