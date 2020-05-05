@@ -114,11 +114,11 @@ export class ApproverComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   toApproveRequest(request_id: number) {
-    this.openId.approveRequest(request_id).subscribe(response=> console.log=(response));
+    this.openId.approveRequest(request_id).subscribe(response=> response);
   }
 
   toDeclineRequest(request_id: number){
-    this.openId.declineRequest(request_id).subscribe(response=> console.log=(response));
+    this.openId.declineRequest(request_id).subscribe(response=> response);
   }
 
 }
