@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from "@angular/core";
 
 @Component({
-  selector: 'app-approver',
-  templateUrl: './approver.component.html',
-  styleUrls: ['./approver.component.css']
+  selector: "app-approver",
+  templateUrl: "./approver.component.html",
+  styleUrls: ["./approver.component.css"]
 })
 export class ApproverComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
