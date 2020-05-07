@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatTableDataSource, MatSort } from "@angular/material";
 import { ActivatedRoute } from "@angular/router";
 import { OpenIdService } from "../service/openId.service";
-import { validateHorizontalPosition } from "@angular/cdk/overlay";
+import { CookieService } from "ngx-cookie-service";
 
 export interface PeriodicElement {
   employee_email: string;
@@ -23,13 +23,11 @@ export class ApproverComponent implements OnInit {
   userrequest_start_date: String;
   ELEMENT_DATA: PeriodicElement[];
   employee_email;
-  // approved: boolean;
-  // declined: boolean;
-  // service: OpenIdService;
 
   constructor(
     private openId: OpenIdService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private cookieService: CookieService
   ) {}
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -46,50 +44,49 @@ export class ApproverComponent implements OnInit {
         )
         .subscribe(response => {
           this.idToken = response.id_token;
-          localStorage.setItem("idToken", this.idToken);
+          this.cookieService.set("idToken", this.idToken);
           console.log("response from id token|", this.idToken);
           this.openId
-            .postValidateTokeId(localStorage.getItem("idToken"))
+            .postValidateTokeId(this.cookieService.get("idToken"))
             .subscribe(res => {
-              localStorage.setItem("userEmail", res.decoded_token.email);
-              localStorage.setItem("l_name", res.decoded_token.family_name);
-              localStorage.setItem("f_name", res.decoded_token.given_name);
-              this.employee_email = localStorage.getItem("userEmail");
-              console.log("email |", localStorage.getItem("userEmail"));
-              
+              this.cookieService.set("userEmail", res.decoded_token.email);
+              this.cookieService.set("l_name", res.decoded_token.family_name);
+              this.cookieService.set("f_name", res.decoded_token.given_name);
+              this.employee_email = this.cookieService.get("userEmail");
+              console.log("email |", this.cookieService.get("userEmail"));
+
               this.openId
                 .checkEmployeePresence(res.decoded_token.email)
                 .subscribe(response => {
                   if (response.response.length == 0) {
                     let requestData = {
-                      employee_email: localStorage.getItem("userEmail"),
-                      employee_firstname: localStorage.getItem("f_name"),
-                      employee_lastname: localStorage.getItem("l_name")
+                      employee_email: this.cookieService.get("userEmail"),
+                      employee_firstname: this.cookieService.get("f_name"),
+                      employee_lastname: this.cookieService.get("l_name")
                     };
-            
+
                     this.openId
                       .addEmployee(requestData)
                       .subscribe(response_ => {
                         console.log(response_);
                         this.userName =
-                          localStorage.getItem("f_name") +
+                          this.cookieService.get("f_name") +
                           " " +
-                          localStorage.getItem("l_name");
-                        localStorage.setItem(
+                          this.cookieService.get("l_name");
+                        this.cookieService.set(
                           "employee_id",
                           response_.employee_id
                         );
-              
                       });
                   } else {
-                    localStorage.setItem(
+                    this.cookieService.set(
                       "employee_id",
                       response.response[0].employee_id
                     );
                     this.userName =
-                      localStorage.getItem("f_name") +
+                      this.cookieService.get("f_name") +
                       " " +
-                      localStorage.getItem("l_name");
+                      this.cookieService.get("l_name");
                     this.openId.getAllRequests().subscribe(data => {
                       this.dataSource = new MatTableDataSource(data);
                     });
@@ -114,11 +111,10 @@ export class ApproverComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   toApproveRequest(request_id: number) {
-    this.openId.approveRequest(request_id).subscribe(response=> response);
+    this.openId.approveRequest(request_id).subscribe(response => response);
   }
 
-  toDeclineRequest(request_id: number){
-    this.openId.declineRequest(request_id).subscribe(response=> response);
+  toDeclineRequest(request_id: number) {
+    this.openId.declineRequest(request_id).subscribe(response => response);
   }
-
 }

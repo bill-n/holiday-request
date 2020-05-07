@@ -137,8 +137,9 @@ export class OpenIdService {
   declineRequest(request_id: Number): Observable<any> {
     let headers = new HttpHeaders();
     let head = headers.append("access-token", localStorage.getItem("idToken"));
-    return this.http.put(this.declineRequestUrl + request_id, { headers: head});
-   
+    return this.http.put(this.declineRequestUrl + request_id, {
+      headers: head
+    });
   }
 
   makeAholidayRequest(employeInfo: any): Observable<any> {
