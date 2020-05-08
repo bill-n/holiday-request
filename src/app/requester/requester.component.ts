@@ -13,74 +13,74 @@ export interface PeriodicElement {
 @Component({
   selector: "app-requester",
   templateUrl: "./requester.component.html",
-  styleUrls: ["./requester.component.css"]
+  styleUrls: ["./requester.component.css"],
 })
 export class RequesterComponent implements OnInit {
   idToken;
   userName: String;
   ELEMENT_DATA: PeriodicElement[];
   employee_email;
-
+  
   constructor(
     private openId: OpenIdService,
-    private activatedRoute: ActivatedRoute,
-    private cookieService: CookieService
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.queryParamMap.subscribe(queryParam => {
+    this.activatedRoute.queryParamMap.subscribe((queryParam) => {
       this.openId
         .postAuthenticationCodeForAccessAndIdToken(queryParam.get("code"))
-        .subscribe(response => {
+        .subscribe((response) => {
           this.idToken = response.id_token;
-          this.cookieService.set("idToken", this.idToken);
-
+          localStorage.setItem("idToken", this.idToken);
+        
           this.openId
-            .postValidateTokeId(this.cookieService.get("idToken"))
-            .subscribe(res => {
-              this.cookieService.set("userEmail", res.decoded_token.email);
-              this.cookieService.set("l_name", res.decoded_token.family_name);
-              this.cookieService.set("f_name", res.decoded_token.given_name);
-              this.employee_email = this.cookieService.get("userEmail");
+            .postValidateTokeId(localStorage.getItem("idToken"))
+            .subscribe((res) => {
+              localStorage.setItem("userEmail", res.decoded_token.email);
+              localStorage.setItem("l_name", res.decoded_token.family_name);
+              localStorage.setItem("f_name", res.decoded_token.given_name);
+              this.employee_email = localStorage.getItem("userEmail");
 
               this.openId
                 .checkEmployeePresence(res.decoded_token.email)
-                .subscribe(response => {
+                .subscribe((response) => {
                   if (response.response.length == 0) {
                     let requestData = {
-                      employee_email: this.cookieService.get("userEmail"),
-                      employee_firstname: this.cookieService.get("f_name"),
-                      employee_lastname: this.cookieService.get("l_name")
+                      employee_email: localStorage.getItem("userEmail"),
+                      employee_firstname: localStorage.getItem("f_name"),
+                      employee_lastname: localStorage.getItem("l_name"),
                     };
-
+          
                     this.openId
                       .addEmployee(requestData)
-                      .subscribe(response_ => {
+                      .subscribe((response_) => {
                         console.log(response_);
                         this.userName =
-                          this.cookieService.get("f_name") +
+                          localStorage.getItem("f_name") +
                           " " +
-                          this.cookieService.get("l_name");
-                        console.log("username is ", this.userName);
-                        this.cookieService.set(
+                          localStorage.getItem("l_name");
+                          console.log("username is ", this.userName);
+                        localStorage.setItem(
                           "employee_id",
                           response_.employee_id
                         );
+              
                       });
                   } else {
-                    this.cookieService.set(
+                    localStorage.setItem(
                       "employee_id",
                       response.response[0].employee_id
                     );
                     this.userName =
-                      this.cookieService.get("f_name") +
+                      localStorage.getItem("f_name") +
                       " " +
-                      this.cookieService.get("l_name");
+                      localStorage.getItem("l_name");
                     this.openId
                       .getAllRequestForEmployee(
                         response.response[0].employee_id
                       )
-                      .subscribe(data => {
+                      .subscribe((data) => {
                         this.dataSource = new MatTableDataSource(data);
                       });
                   }
@@ -89,11 +89,11 @@ export class RequesterComponent implements OnInit {
         });
     });
   }
-
+ 
   displayedColumns: string[] = [
     "request_start_date",
     "request_report_date",
-    "req_status"
+    "req_status",
   ];
 
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
